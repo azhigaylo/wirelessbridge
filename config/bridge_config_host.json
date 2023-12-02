@@ -1,0 +1,55 @@
+{
+    "components": [
+        {
+            "name": "final_haven",
+            "lib_path": "system/components/finalhaven/libfinalhaven.so",
+            "config": {
+                "config": {
+                    "data": "long long string"
+                }
+            }
+        },
+        {
+            "name": "executor",
+            "lib_path": "system/components/executor/libexecutor.so",
+            "config": {
+                "config": {
+                    "data": "long long string"
+                }
+            }
+        },
+        {
+            "name": "connman",
+            "lib_path": "system/components/connman/libconnman.so",
+            "config": {
+                "config": {
+                    "data": "long long string"
+                }
+            }
+        },
+        {
+            "name": "mqttconn",
+            "lib_path": "bridge/mqtt/libmqttconn.so",
+            "config": {
+                "config": {
+                    "mqtt_broker": "192.168.0.105",
+                    "mqtt_broker_port": 8097,
+                    "mqtt_username": "homebrain",
+                    "mqtt_password": "123!@#"
+                }
+            }
+        },
+        {
+            "name": "bridge",
+            "lib_path": "bridge/bridge/libbridge.so",
+            "config": {
+                "config": {
+                    "bridge_cfg_path": "wireless_table_gen.json"
+                }
+            }
+        }
+    ]
+}
+
+
+

@@ -1,0 +1,1694 @@
+{
+    "TableConfig": {
+        "table_data_time": "2019-Jul-26 21:00:01.678215"
+    },
+    "DPointRouting": [
+        {
+            "dpoint_number": "10",
+            "mqtt_topic": "home\/status\/plc\/communication\/OVEN2",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "ok"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "error"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "36",
+            "mqtt_topic": "home\/status\/light\/hallway",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "37",
+            "mqtt_topic": "home\/status\/light\/room1",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "38",
+            "mqtt_topic": "home\/status\/light\/hall_kitchen",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "39",
+            "mqtt_topic": "home\/status\/light\/hall_chimney",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "40",
+            "mqtt_topic": "home\/status\/light\/bathroom",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "41",
+            "mqtt_topic": "home\/status\/light\/tambour",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "42",
+            "mqtt_topic": "home\/status\/light\/stairway",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "43",
+            "mqtt_topic": "home\/status\/light\/room2",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "11",
+            "mqtt_topic": "home\/status\/plc\/communication\/OVEN3",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "ok"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "error"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "44",
+            "mqtt_topic": "home\/status\/light\/terrace",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "45",
+            "mqtt_topic": "home\/status\/light\/room3",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "46",
+            "mqtt_topic": "home\/status\/light\/wardrobe",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "47",
+            "mqtt_topic": "home\/status\/light\/hall_kitchen_light",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "48",
+            "mqtt_topic": "home\/status\/reserve\/channel_1",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "49",
+            "mqtt_topic": "home\/status\/reserve\/channel_2",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "50",
+            "mqtt_topic": "home\/status\/reserve\/channel_3",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "51",
+            "mqtt_topic": "home\/status\/plc\/power",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "9",
+            "mqtt_topic": "home\/status\/plc\/communication\/OVEN1",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "ok"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "error"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "20",
+            "mqtt_topic": "home\/control\/light\/hallway",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "21",
+            "mqtt_topic": "home\/control\/light\/room1",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "22",
+            "mqtt_topic": "home\/control\/light\/hall_kitchen",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "23",
+            "mqtt_topic": "home\/control\/light\/hall_chimney",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "24",
+            "mqtt_topic": "home\/control\/light\/bathroom",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "25",
+            "mqtt_topic": "home\/control\/light\/tambour",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "26",
+            "mqtt_topic": "home\/control\/light\/stairway",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "27",
+            "mqtt_topic": "home\/control\/light\/room2",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "28",
+            "mqtt_topic": "home\/control\/light\/terrace",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "29",
+            "mqtt_topic": "home\/control\/light\/room3",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "30",
+            "mqtt_topic": "home\/control\/light\/wardrobe",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "31",
+            "mqtt_topic": "home\/control\/light\/hall_kitchen_light",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "32",
+            "mqtt_topic": "home\/control\/rollets\/kitchen_window_on",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "33",
+            "mqtt_topic": "home\/control\/rollets\/kitchen_window_off",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "34",
+            "mqtt_topic": "home\/control\/rollets\/terrace_window_on",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "35",
+            "mqtt_topic": "home\/control\/rollets\/terrace_window_off",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "12",
+            "mqtt_topic": "home\/status\/plc\/communication\/OVEN4",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "ok"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "error"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "52",
+            "mqtt_topic": "home\/control\/rollets\/main_window_on",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "53",
+            "mqtt_topic": "home\/control\/rollets\/main_window_off",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "54",
+            "mqtt_topic": "home\/control\/ventilation\/hall_on",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "55",
+            "mqtt_topic": "home\/control\/ventilation\/hall_off",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "56",
+            "mqtt_topic": "home\/control\/ventilation\/room2_on",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "57",
+            "mqtt_topic": "home\/control\/ventilation\/room2_off",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "58",
+            "mqtt_topic": "home\/control\/ventilation\/room3_on",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "59",
+            "mqtt_topic": "home\/control\/ventilation\/room3_off",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "15",
+            "mqtt_topic": "home\/status\/plc\/communication\/st_hallway",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "ok"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "error"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "85",
+            "mqtt_topic": "home\/status\/alarm\/hallway",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "unknown"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "disarmed"
+                },
+                {
+                    "value": "2",
+                    "mapp_to": "triggered"
+                },
+                {
+                    "value": "3",
+                    "mapp_to": "armed_home"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "86",
+            "mqtt_topic": "home\/events\/alarm\/hallway",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "no event"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "gas"
+                },
+                {
+                    "value": "2",
+                    "mapp_to": "t'C"
+                },
+                {
+                    "value": "3",
+                    "mapp_to": "gas+t'C"
+                },
+                {
+                    "value": "4",
+                    "mapp_to": "motion"
+                },
+                {
+                    "value": "5",
+                    "mapp_to": "motion+gas"
+                },
+                {
+                    "value": "6",
+                    "mapp_to": "motion+t'C+gas"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "87",
+            "mqtt_topic": "home\/events\/motion\/hallway",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "no event"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "motion"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "88",
+            "mqtt_topic": "home\/control\/alarm\/hallway",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "16",
+            "mqtt_topic": "home\/status\/plc\/communication\/st_hall",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "ok"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "error"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "89",
+            "mqtt_topic": "home\/status\/alarm\/hall",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "unknown"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "disarmed"
+                },
+                {
+                    "value": "2",
+                    "mapp_to": "triggered"
+                },
+                {
+                    "value": "3",
+                    "mapp_to": "armed_home"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "90",
+            "mqtt_topic": "home\/events\/alarm\/hall",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "no event"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "gas"
+                },
+                {
+                    "value": "2",
+                    "mapp_to": "t'C"
+                },
+                {
+                    "value": "3",
+                    "mapp_to": "gas+t'C"
+                },
+                {
+                    "value": "4",
+                    "mapp_to": "motion"
+                },
+                {
+                    "value": "5",
+                    "mapp_to": "motion+gas"
+                },
+                {
+                    "value": "6",
+                    "mapp_to": "motion+t'C+gas"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "91",
+            "mqtt_topic": "home\/events\/motion\/hall",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "no event"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "motion"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "92",
+            "mqtt_topic": "home\/control\/alarm\/hall",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "17",
+            "mqtt_topic": "home\/status\/plc\/communication\/st_room1",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "ok"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "error"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "93",
+            "mqtt_topic": "home\/status\/alarm\/room1",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "unknown"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "disarmed"
+                },
+                {
+                    "value": "2",
+                    "mapp_to": "triggered"
+                },
+                {
+                    "value": "3",
+                    "mapp_to": "armed_home"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "94",
+            "mqtt_topic": "home\/events\/alarm\/room1",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "no event"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "gas"
+                },
+                {
+                    "value": "2",
+                    "mapp_to": "t'C"
+                },
+                {
+                    "value": "3",
+                    "mapp_to": "gas+t'C"
+                },
+                {
+                    "value": "4",
+                    "mapp_to": "motion"
+                },
+                {
+                    "value": "5",
+                    "mapp_to": "motion+gas"
+                },
+                {
+                    "value": "6",
+                    "mapp_to": "motion+t'C+gas"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "95",
+            "mqtt_topic": "home\/events\/motion\/room1",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "no event"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "motion"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "96",
+            "mqtt_topic": "home\/control\/alarm\/room1",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "18",
+            "mqtt_topic": "home\/status\/plc\/communication\/st_room2",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "ok"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "error"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "97",
+            "mqtt_topic": "home\/status\/alarm\/room2",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "unknown"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "disarmed"
+                },
+                {
+                    "value": "2",
+                    "mapp_to": "triggered"
+                },
+                {
+                    "value": "3",
+                    "mapp_to": "armed_home"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "98",
+            "mqtt_topic": "home\/events\/alarm\/room2",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "no event"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "gas"
+                },
+                {
+                    "value": "2",
+                    "mapp_to": "t'C"
+                },
+                {
+                    "value": "3",
+                    "mapp_to": "gas+t'C"
+                },
+                {
+                    "value": "4",
+                    "mapp_to": "motion"
+                },
+                {
+                    "value": "5",
+                    "mapp_to": "motion+gas"
+                },
+                {
+                    "value": "6",
+                    "mapp_to": "motion+t'C+gas"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "99",
+            "mqtt_topic": "home\/events\/motion\/room2",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "no event"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "motion"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "100",
+            "mqtt_topic": "home\/control\/alarm\/room2",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "19",
+            "mqtt_topic": "home\/status\/plc\/communication\/st_room3",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "ok"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "error"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "101",
+            "mqtt_topic": "home\/status\/alarm\/room3",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "unknown"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "disarmed"
+                },
+                {
+                    "value": "2",
+                    "mapp_to": "triggered"
+                },
+                {
+                    "value": "3",
+                    "mapp_to": "armed_home"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "102",
+            "mqtt_topic": "home\/events\/alarm\/room3",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "no event"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "gas"
+                },
+                {
+                    "value": "2",
+                    "mapp_to": "t'C"
+                },
+                {
+                    "value": "3",
+                    "mapp_to": "gas+t'C"
+                },
+                {
+                    "value": "4",
+                    "mapp_to": "motion"
+                },
+                {
+                    "value": "5",
+                    "mapp_to": "motion+gas"
+                },
+                {
+                    "value": "6",
+                    "mapp_to": "motion+t'C+gas"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "103",
+            "mqtt_topic": "home\/events\/motion\/room3",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "no event"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "motion"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "104",
+            "mqtt_topic": "home\/control\/alarm\/room3",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "13",
+            "mqtt_topic": "home\/status\/plc\/communication\/OVEN5",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "ok"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "error"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "60",
+            "mqtt_topic": "home\/status\/outdor_motion\/sensor_1",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "motion"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "no event"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "61",
+            "mqtt_topic": "home\/status\/outdor_motion\/sensor_2",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "motion"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "no event"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "62",
+            "mqtt_topic": "home\/status\/outdor_motion\/sensor_3",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "motion"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "no event"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "63",
+            "mqtt_topic": "home\/status\/outdor_motion\/sensor_4",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "motion"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "no event"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "64",
+            "mqtt_topic": "home\/status\/outdor_motion\/sensor_5",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "motion"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "no event"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "65",
+            "mqtt_topic": "home\/status\/water_leak\/basement",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "leak"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "normal"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "66",
+            "mqtt_topic": "home\/status\/plc\/power\/upd_dc_ok",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "67",
+            "mqtt_topic": "home\/status\/plc\/power\/upd_bat_fail",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "68",
+            "mqtt_topic": "home\/status\/plc\/power\/upd_bat_discharge",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "69",
+            "mqtt_topic": "home\/status\/reserve\/channel_8",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "70",
+            "mqtt_topic": "home\/status\/reserve\/channel_9",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "71",
+            "mqtt_topic": "home\/status\/reserve\/channel_10",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "72",
+            "mqtt_topic": "home\/status\/reserve\/channel_11",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "73",
+            "mqtt_topic": "home\/status\/reserve\/channel_12",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "74",
+            "mqtt_topic": "home\/status\/reserve\/channel_13",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "75",
+            "mqtt_topic": "home\/status\/reserve\/channel_14",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "14",
+            "mqtt_topic": "home\/status\/plc\/communication\/OVEN6",
+            "mqtt_subscribe": "false",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "ok"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "error"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "76",
+            "mqtt_topic": "home\/control\/vatering\/channel_1",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "77",
+            "mqtt_topic": "home\/control\/vatering\/channel_2",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "78",
+            "mqtt_topic": "home\/control\/vatering\/channel_3",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "79",
+            "mqtt_topic": "home\/control\/vatering\/channel_4",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "80",
+            "mqtt_topic": "home\/control\/reserve\/channel_1",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "81",
+            "mqtt_topic": "home\/control\/reserve\/channel_2",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "82",
+            "mqtt_topic": "home\/control\/reserve\/channel_3",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        },
+        {
+            "dpoint_number": "83",
+            "mqtt_topic": "home\/control\/reserve\/channel_4",
+            "mqtt_subscribe": "true",
+            "value_mapping": [
+                {
+                    "value": "0",
+                    "mapp_to": "off"
+                },
+                {
+                    "value": "1",
+                    "mapp_to": "on"
+                }
+            ]
+        }
+    ],
+    "APointRouting": [
+        {
+            "apoint_number": "10",
+            "mqtt_topic": "home\/status\/temperature\/hallway",
+            "mqtt_subscribe": "false",
+            "value_mapping": "-100 ... +100"
+        },
+        {
+            "apoint_number": "11",
+            "mqtt_topic": "home\/status\/lighting\/hallway",
+            "mqtt_subscribe": "false",
+            "value_mapping": "0 ... 255"
+        },
+        {
+            "apoint_number": "12",
+            "mqtt_topic": "home\/status\/gas\/hallway",
+            "mqtt_subscribe": "false",
+            "value_mapping": "0 ... 10"
+        },
+        {
+            "apoint_number": "14",
+            "mqtt_topic": "home\/engineering\/settings\/motion_sensotivity\/hallway",
+            "mqtt_subscribe": "true",
+            "value_mapping": "0 ... 100"
+        },
+        {
+            "apoint_number": "15",
+            "mqtt_topic": "home\/status\/temperature\/hall",
+            "mqtt_subscribe": "false",
+            "value_mapping": "-100 ... +100"
+        },
+        {
+            "apoint_number": "16",
+            "mqtt_topic": "home\/status\/lighting\/hall",
+            "mqtt_subscribe": "false",
+            "value_mapping": "0 ... 255"
+        },
+        {
+            "apoint_number": "17",
+            "mqtt_topic": "home\/status\/gas\/hall",
+            "mqtt_subscribe": "false",
+            "value_mapping": "0 ... 10"
+        },
+        {
+            "apoint_number": "19",
+            "mqtt_topic": "home\/engineering\/settings\/motion_sensotivity\/hall",
+            "mqtt_subscribe": "true",
+            "value_mapping": "0 ... 100"
+        },
+        {
+            "apoint_number": "20",
+            "mqtt_topic": "home\/status\/temperature\/room1",
+            "mqtt_subscribe": "false",
+            "value_mapping": "-100 ... +100"
+        },
+        {
+            "apoint_number": "21",
+            "mqtt_topic": "home\/status\/lighting\/room1",
+            "mqtt_subscribe": "false",
+            "value_mapping": "0 ... 255"
+        },
+        {
+            "apoint_number": "22",
+            "mqtt_topic": "home\/status\/gas\/room1",
+            "mqtt_subscribe": "false",
+            "value_mapping": "0 ... 10"
+        },
+        {
+            "apoint_number": "24",
+            "mqtt_topic": "home\/engineering\/settings\/motion_sensotivity\/room1",
+            "mqtt_subscribe": "true",
+            "value_mapping": "0 ... 100"
+        },
+        {
+            "apoint_number": "25",
+            "mqtt_topic": "home\/status\/temperature\/room2",
+            "mqtt_subscribe": "false",
+            "value_mapping": "-100 ... +100"
+        },
+        {
+            "apoint_number": "26",
+            "mqtt_topic": "home\/status\/lighting\/room2",
+            "mqtt_subscribe": "false",
+            "value_mapping": "0 ... 255"
+        },
+        {
+            "apoint_number": "27",
+            "mqtt_topic": "home\/status\/gas\/romm2",
+            "mqtt_subscribe": "false",
+            "value_mapping": "0 ... 10"
+        },
+        {
+            "apoint_number": "29",
+            "mqtt_topic": "home\/engineering\/settings\/motion_sensotivity\/room2",
+            "mqtt_subscribe": "true",
+            "value_mapping": "0 ... 100"
+        },
+        {
+            "apoint_number": "30",
+            "mqtt_topic": "home\/status\/temperature\/room3",
+            "mqtt_subscribe": "false",
+            "value_mapping": "-100 ... +100"
+        },
+        {
+            "apoint_number": "31",
+            "mqtt_topic": "home\/status\/lighting\/room3",
+            "mqtt_subscribe": "false",
+            "value_mapping": "0 ... 255"
+        },
+        {
+            "apoint_number": "32",
+            "mqtt_topic": "home\/status\/gas\/room3",
+            "mqtt_subscribe": "false",
+            "value_mapping": "0 ... 10"
+        },
+        {
+            "apoint_number": "34",
+            "mqtt_topic": "home\/engineering\/settings\/motion_sensotivity\/room3",
+            "mqtt_subscribe": "true",
+            "value_mapping": "0 ... 100"
+        }
+    ]
+}

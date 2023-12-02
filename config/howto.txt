@@ -1,0 +1,8 @@
+azhigaylo-nb@azhigaylo:~/homebrain/homebrain/build$ ./build_wirelessbridge.sh
+azhigaylo-nb@azhigaylo:~/homebrain/homebrain_products/host/wirelessbridge/src$ ./wirelessbridge -d 4 -s 0 -c bridge_config_host.json
+
+
+azhigaylo-nb@azhigaylo:~$ sudo systemctl start mosquitto
+azhigaylo-nb@azhigaylo:~$ sudo systemctl stop mosquitto
+
+azhigaylo-nb@azhigaylo:~$ mqtt-explorer

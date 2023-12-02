@@ -1,0 +1,53 @@
+{
+    "TableConfig": {
+        "table_data_time": "2023-Mar-01 21:00:01.678215"
+    },
+    "WirelessList": [
+        {
+            "input_mqtt_topic": "home\/external\/weather_station\/status\/weather_station",
+            "output_mqtt_topic": "home\/external\/weather_station\/control\/weather_station",
+            "status_mqtt_topic": "home\/status\/mqtt\/communication\/weather_station",
+            "node_timeout_in_sec": "10",
+
+            "input_mapping": [
+                {
+                    "number": 0,
+                    "name": "outside temperature",
+                    "mqtt_topic": "home\/status\/mqtt\/status\/weather_station\/outside_temp"
+                },
+                {
+                    "number": 1,
+                    "name": "wind speed",
+                    "mqtt_topic": "home\/status\/mqtt\/status\/weather_station\/wind_speed"
+                },
+                {
+                    "number": 2,
+                    "name": "solar radiation",
+                    "mqtt_topic": "home\/status\/mqtt\/status\/weather_station\/wind_speed"
+                },
+                {
+                    "number": 3,
+                    "name": "greenhouse temperature",
+                    "mqtt_topic": "home\/status\/mqtt\/status\/weather_station\/greenhouse_temp"
+                },
+                {
+                    "number": 4,
+                    "name": "greenhouse humidity",
+                    "mqtt_topic": "home\/status\/mqtt\/status\/weather_station\/greenhouse_humidity"
+                },
+                {
+                    "number": 5,
+                    "name": "greenhouse motion",
+                    "mqtt_topic": "home\/status\/mqtt\/status\/weather_station\/greenhouse_motion"
+                }
+            ],
+            "output_mapping": [
+                {
+                    "number": 0,
+                    "name": "greenhouse light",
+                    "mqtt_topic": "home\/control\/greenhouse\/light"
+                }
+            ]
+        }
+    ]
+}
