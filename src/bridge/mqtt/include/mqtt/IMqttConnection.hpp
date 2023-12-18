@@ -13,23 +13,18 @@
 #include "interface/TInterface.hpp"
 
 #include "MqttEvents.hpp"
-#include "common/EventConsumer.hpp"
+#include "common/EventLoopHolder.hpp"
 
 namespace Mqtt{
 
 class IMqttConnection : public HBE::TInterface<IMqttConnection>
+                      , public Common::TEventLoopHolder<TMqttEventVariant>
 {
 public:
     ///
     /// @brief IMqttConnection default destructor
     ///
     virtual ~IMqttConnection() = default;
-
-    ///
-    /// @brief get event queue context
-    /// @return context which contain event queue
-    ///
-    virtual const std::shared_ptr<Common::TEventConsumer<TMqttEventVariant>> getEventLoop() const = 0;
 
     ///
     /// @brief subscribe on mqtt topic

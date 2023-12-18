@@ -1,9 +1,10 @@
 {
-    "TableConfig": {
-        "table_data_time": "2023-Mar-01 21:00:01.678215"
+    "table_config": {
+        "table_data_time": "2023-Dec-15 21:00:01.678215"
     },
-    "WirelessList": [
+    "wireless_list": [
         {
+            "dev_name": "weather station",
             "input_mqtt_topic": "home\/external\/weather_station\/status\/weather_station",
             "output_mqtt_topic": "home\/external\/weather_station\/control\/weather_station",
             "status_mqtt_topic": "home\/status\/mqtt\/communication\/weather_station",
@@ -13,39 +14,71 @@
                 {
                     "number": 0,
                     "name": "outside temperature",
-                    "mqtt_topic": "home\/status\/mqtt\/status\/weather_station\/outside_temp"
+                    "mqtt_topic": "home\/status\/mqtt\/status\/weather_station\/outside_temp",
+                    "mqtt_subscribe": "false",
+                    "value_mapping": ""
                 },
                 {
                     "number": 1,
                     "name": "wind speed",
-                    "mqtt_topic": "home\/status\/mqtt\/status\/weather_station\/wind_speed"
+                    "mqtt_topic": "home\/status\/mqtt\/status\/weather_station\/wind_speed",
+                    "mqtt_subscribe": "false",
+                    "value_mapping": ""
                 },
                 {
                     "number": 2,
                     "name": "solar radiation",
-                    "mqtt_topic": "home\/status\/mqtt\/status\/weather_station\/wind_speed"
+                    "mqtt_topic": "home\/status\/mqtt\/status\/weather_station\/wind_speed",
+                    "mqtt_subscribe": "false",
+                    "value_mapping": ""
                 },
                 {
                     "number": 3,
                     "name": "greenhouse temperature",
-                    "mqtt_topic": "home\/status\/mqtt\/status\/weather_station\/greenhouse_temp"
+                    "mqtt_topic": "home\/status\/mqtt\/status\/weather_station\/greenhouse_temp",
+                    "mqtt_subscribe": "false",
+                    "value_mapping": ""
                 },
                 {
                     "number": 4,
                     "name": "greenhouse humidity",
-                    "mqtt_topic": "home\/status\/mqtt\/status\/weather_station\/greenhouse_humidity"
+                    "mqtt_topic": "home\/status\/mqtt\/status\/weather_station\/greenhouse_humidity",
+                    "mqtt_subscribe": "false",
+                    "value_mapping": ""
                 },
                 {
                     "number": 5,
                     "name": "greenhouse motion",
-                    "mqtt_topic": "home\/status\/mqtt\/status\/weather_station\/greenhouse_motion"
+                    "mqtt_topic": "home\/status\/mqtt\/status\/weather_station\/greenhouse_motion",
+                    "mqtt_subscribe": "false",
+                    "value_mapping": [
+                        {
+                            "value": "0",
+                            "mapp_to": "no event"
+                        },
+                        {
+                            "value": "1",
+                            "mapp_to": "motion"
+                        }
+                    ]
                 }
             ],
             "output_mapping": [
                 {
                     "number": 0,
                     "name": "greenhouse light",
-                    "mqtt_topic": "home\/control\/greenhouse\/light"
+                    "mqtt_topic": "home\/control\/greenhouse\/light",
+                    "mqtt_subscribe": "true",
+                    "value_mapping": [
+                        {
+                            "value": "0",
+                            "mapp_to": "off"
+                        },
+                        {
+                            "value": "1",
+                            "mapp_to": "on"
+                        }
+                    ]
                 }
             ]
         }

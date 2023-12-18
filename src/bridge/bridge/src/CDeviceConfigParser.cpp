@@ -5,7 +5,7 @@
  * modify it under the terms of the MIT License
  */
 
-#include "helpers/CDeviceConfigParser.hpp"
+#include "CDeviceConfigParser.hpp"
 
 #include <memory>
 #include <iostream>
@@ -16,23 +16,30 @@
 
 #include "common/slog.h"
 
-namespace HBE
+namespace WBridge
 {
 
 namespace Tbl
 {
-    const std::string c_wb_input_mqtt_topic     = "input_mqtt_topic";
-    const std::string c_wb_output_mqtt_topic    = "output_mqtt_topic";
-    const std::string c_wb_status_mqtt_topic    = "status_mqtt_topic";
-    const std::string c_wb_node_timeout_in_sec  = "node_timeout_in_sec";
-    const std::string c_wb_input_mapping        = "input_mapping";
-    const std::string c_wb_output_mapping       = "output_mapping";
-    const std::string c_wb_subconfig_number     = "number";
-    const std::string c_wb_subconfig_name       = "name";
-    const std::string c_wb_subconfig_mqtt_topic = "mqtt_topic";
+    const std::string c_wb_dev_list            = "wireless_list";
+    const std::string c_wb_dev_name            = "dev_name";
+    const std::string c_wb_input_mqtt_topic    = "input_mqtt_topic";
+    const std::string c_wb_output_mqtt_topic   = "output_mqtt_topic";
+    const std::string c_wb_status_mqtt_topic   = "status_mqtt_topic";
+    const std::string c_wb_node_timeout_in_sec = "node_timeout_in_sec";
+    const std::string c_wb_input_mapping       = "input_mapping";
+    const std::string c_wb_output_mapping      = "output_mapping";
+
+    const std::string c_wb_subconfig_number            = "number";
+    const std::string c_wb_subconfig_name              = "name";
+    const std::string c_wb_subconfig_mqtt_topic        = "mqtt_topic";
+    const std::string c_wb_subconfig_mqtt_subscribe    = "mqtt_subscribe";
+    const std::string c_wb_subconfig_value_mapping     = "value_mapping";
+    const std::string c_wb_subconfig_mapping_value_int = "value";
+    const std::string c_wb_subconfig_mapping_value_str = "mapp_to";
 }
 
-CComponentConfigParser::CComponentConfigParser(std::string const cfg_path)
+CDeviceConfigParser::CDeviceConfigParser(std::string const cfg_path)
 {
     if (!boost::filesystem::exists(cfg_path))
     {
@@ -42,120 +49,92 @@ CComponentConfigParser::CComponentConfigParser(std::string const cfg_path)
     {
         try
         {
-            // create discret point rouring table
-            for (pt::ptree::value_type &d_gtw_item : table_ptree.get_child(Tbl::c_gtw_table_d_routing))
-            {
-                router_item_t router_item;
-                router_item.number = static_cast<uint32_t>(d_gtw_item.second.get<unsigned>(Tbl::c_gtw_item_d_number));
-                router_item.mqtt_topic = d_gtw_item.second.get<std::string>(Tbl::c_gtw_item_topic);
-                router_item.topic_sub = d_gtw_item.second.get<bool>(Tbl::c_gtw_item_subscription);
-
-                printDebug("CGtwTableParser/%s: d_num = %i / s = %i / topic = %s", __FUNCTION__, router_item.number,
-                                                                                               router_item.topic_sub,
-                                                                                               router_item.mqtt_topic.c_str());
-                // create discret point rouring table
-                for (pt::ptree::value_type &d_item_mapping : d_gtw_item.second.get_child(Tbl::c_gtw_item_mapping))
-                {
-                   uint16_t value_int = static_cast<uint32_t>(d_item_mapping.second.get<unsigned>(Tbl::c_gtw_item_mapping_value_int));
-                   std::string value_str = d_item_mapping.second.get<std::string>(Tbl::c_gtw_item_mapping_value_str);
-
-                   router_item.mapping.push_back(std::make_pair(value_int, value_str));
-
-                   printDebug("CGtwTableParser/%s: int = %i <-> str = %s", __FUNCTION__, value_int, value_str.c_str());
-                }
-                digitalCheckForMax(router_item.number);
-                m_gwt_vector.push_back(std::make_pair(Tbl::c_gtw_table_d_routing, router_item));
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
             namespace pt = boost::property_tree;
-            pt::ptree cmp_ptree;
-            pt::read_json(cfg_path, cmp_ptree);
+            pt::ptree dev_ptree;
+            pt::read_json(cfg_path, dev_ptree);
+
+            printDebug("CDeviceConfigParser/%s: device cfg path = %s", __FUNCTION__, cfg_path.c_str());
 
             // create discret point rouring table
-            for (const auto& cmp_item : cmp_ptree.get_child(Tbl::c_cmp_list))
+            for (pt::ptree::value_type &wb_item : dev_ptree.get_child(Tbl::c_wb_dev_list))
             {
-                std::string cmp_name = cmp_item.second.get<std::string>(Tbl::c_cmp_name);
-                std::string cmp_lib_path = cmp_item.second.get<std::string>(Tbl::c_cmp_lib_path);
-                pt::ptree cfg_ptree = cmp_item.second.get_child(Tbl::c_cmp_config);
+                RouterDeviceItem router_item;
 
-                m_components_name.push_back(cmp_name);
-                m_components_map.insert({cmp_name, std::make_pair(cmp_lib_path, cfg_ptree)});
+                router_item.dev_name = wb_item.second.get<std::string>(Tbl::c_wb_dev_name);
+                router_item.input_mqtt_topic = wb_item.second.get<std::string>(Tbl::c_wb_input_mqtt_topic);
+                router_item.output_mqtt_topic = wb_item.second.get<std::string>(Tbl::c_wb_output_mqtt_topic);
+                router_item.status_mqtt_topic = wb_item.second.get<std::string>(Tbl::c_wb_status_mqtt_topic);
+                router_item.node_timeout_in_sec = wb_item.second.get<uint32_t>(Tbl::c_wb_node_timeout_in_sec);
 
-                printDebug("CComponentConfigParser/%s: found component = %s(%s)", __FUNCTION__, cmp_name.c_str(), cmp_lib_path.c_str());
+                printDebug("CGtwTableParser/%s: found device d_name = %s", __FUNCTION__, router_item.dev_name.c_str());
+
+                // create discret point rouring table
+                for (pt::ptree::value_type &wb_item_inputs : wb_item.second.get_child(Tbl::c_wb_input_mapping))
+                {
+                    RouterDeviceChannel router_item_input;
+
+                    router_item_input.number = wb_item_inputs.second.get<uint32_t>(Tbl::c_wb_subconfig_number);
+                    router_item_input.name = wb_item_inputs.second.get<std::string>(Tbl::c_wb_subconfig_name);
+                    router_item_input.mqtt_topic = wb_item_inputs.second.get<std::string>(Tbl::c_wb_subconfig_mqtt_topic);
+                    router_item_input.mqtt_subscribe = wb_item_inputs.second.get<bool>(Tbl::c_wb_subconfig_mqtt_subscribe);
+
+                    printDebug("CGtwTableParser/%s: input number = %i", __FUNCTION__, router_item_input.number);
+
+                    // create inputs value mapping
+                    for (pt::ptree::value_type &wb_item_inputs_mapping : wb_item_inputs.second.get_child(Tbl::c_wb_subconfig_value_mapping))
+                    {
+                        uint16_t value_int = wb_item_inputs_mapping.second.get<uint16_t>(Tbl::c_wb_subconfig_mapping_value_int);
+                        std::string value_str = wb_item_inputs_mapping.second.get<std::string>(Tbl::c_wb_subconfig_mapping_value_str);
+
+                        router_item_input.value_mapping.push_back(std::make_pair(value_int, value_str));
+
+                        printDebug("CGtwTableParser/%s: int = %i <-> str = %s", __FUNCTION__, value_int, value_str.c_str());
+                    }
+                    // add inputs
+                    router_item.input_mapping.push_back(router_item_input);
+                }
+
+                // create discret point rouring table
+                for (pt::ptree::value_type &wb_item_outputs : wb_item.second.get_child(Tbl::c_wb_output_mapping))
+                {
+                    RouterDeviceChannel router_item_output;
+
+                    router_item_output.number = wb_item_outputs.second.get<uint32_t>(Tbl::c_wb_subconfig_number);
+                    router_item_output.name = wb_item_outputs.second.get<std::string>(Tbl::c_wb_subconfig_name);
+                    router_item_output.mqtt_topic = wb_item_outputs.second.get<std::string>(Tbl::c_wb_subconfig_mqtt_topic);
+                    router_item_output.mqtt_subscribe = wb_item_outputs.second.get<bool>(Tbl::c_wb_subconfig_mqtt_subscribe);
+
+                    printDebug("CGtwTableParser/%s: output number = %i", __FUNCTION__, router_item_output.number);
+
+                    // create inputs value mapping
+                    for (pt::ptree::value_type &wb_item_outputs_mapping : wb_item_outputs.second.get_child(Tbl::c_wb_subconfig_value_mapping))
+                    {
+                        uint16_t value_int = wb_item_outputs_mapping.second.get<uint16_t>(Tbl::c_wb_subconfig_mapping_value_int);
+                        std::string value_str = wb_item_outputs_mapping.second.get<std::string>(Tbl::c_wb_subconfig_mapping_value_str);
+
+                        router_item_output.value_mapping.push_back(std::make_pair(value_int, value_str));
+
+                        printDebug("CGtwTableParser/%s: int = %i <-> str = %s", __FUNCTION__, value_int, value_str.c_str());
+                    }
+                    // add inputs
+                    router_item.output_mapping.push_back(router_item_output);
+                }
+                m_wb_vector.push_back(router_item);
             }
-*/
         }
         catch (const std::exception& e)
         {
-            printError("CComponentConfigParser/%s: Error during parsing config: %s", __FUNCTION__, cfg_path.c_str());
-            printError("CComponentConfigParser/%s: Error description: %s", __FUNCTION__, e.what());
+            printError("CDeviceConfigParser/%s: Error during parsing config: %s", __FUNCTION__, cfg_path.c_str());
+            printError("CDeviceConfigParser/%s: Error description: %s", __FUNCTION__, e.what());
 
             throw std::runtime_error("configuration error: config parsing error" );
         }
     }
 }
 
-CComponentConfigParser::~CComponentConfigParser() noexcept
+CDeviceConfigParser::~CDeviceConfigParser() noexcept
 {
-    printDebug("CComponentConfigParser/%s: removed...", __FUNCTION__);
+    printDebug("CDeviceConfigParser/%s: removed...", __FUNCTION__);
 }
 
-std::vector<std::string> CComponentConfigParser::getComponentList() const
-{
-    return m_components_name;
-}
-
-std::string CComponentConfigParser::getComponentLib(std::string const cmp_name)
-{
-    std::string lib_path;
-
-    auto cmp_item = m_components_map.find(cmp_name);
-    if (cmp_item != m_components_map.end())
-    {
-        lib_path = cmp_item->second.first;
-    }
-    else
-    {
-        throw std::runtime_error("configuration error: unknown component name" );
-    }
-
-    return lib_path;
-}
-
-
-boost::property_tree::ptree CComponentConfigParser::getComponentConfig(std::string const cmp_name)
-{
-    boost::property_tree::ptree cmp_config;
-
-    auto cmp_item = m_components_map.find(cmp_name);
-    if (cmp_item != m_components_map.end())
-    {
-        cmp_config = cmp_item->second.second;
-    }
-    else
-    {
-        throw std::runtime_error("configuration error: unknown component name" );
-    }
-
-    return cmp_config;
-}
-
-} //namespase HBE
+} //namespase WBridge

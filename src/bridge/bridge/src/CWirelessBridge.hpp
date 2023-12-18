@@ -13,11 +13,14 @@
 #include "component/TComponent.hpp"
 #include "interface/TInterfaces.hpp"
 
-#include "finalhaven/IFinalHaven.hpp"
+#include "common/SysTime.hpp"
 #include "executor/IExecutor.hpp"
-#include "mqtt/IMqttConnection.hpp"
+#include "finalhaven/IFinalHaven.hpp"
 
+#include "mqtt/IMqttConnection.hpp"
 #include "common/EventListener.hpp"
+#include "CDeviceConfigParser.hpp"
+
 
 IMPLEMENT_INTERFACE(WirelessBridge, WBridge::IWirelessBridge);
 
@@ -42,7 +45,6 @@ class CWirelessBridge final
     , public HBE::TComponent<CWirelessBridgeAnnotation>
     , public std::enable_shared_from_this<CWirelessBridge>
 {
-
 public:
     ///
     /// @brief constructor
@@ -90,14 +92,23 @@ private:
     ///
     void mqttEventProcessFunc(const std::unique_ptr<Mqtt::TMqttEventVariant>& ev);
 
+    ///
+    /// @brief subscribe mqtt topics
+    ///
+    void mqttSubscribe() const;
+
+    ///
+    /// @brief iterable method
+    ///
+    void processDeviceList() const;
+
 private:
     Depends                  m_dependencies;
     System::IFinalHavenPtr   m_final_haven;
     System::IExecutorPtr     m_executor;
     Mqtt::IMqttConnectionPtr m_mqtt_conn;
+    CDeviceConfigParserPtr   m_dev_cfg;
 
-     std::string             m_dev_cfg_path;
-
-    Common::TEventListener<Mqtt::TMqttEventVariant> m_mqtt_listener;
+    Common::TEventHolderListener<Mqtt::TMqttEventVariant> m_mqtt_listener;
 };
 } // namespace WBridge

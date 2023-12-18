@@ -88,7 +88,7 @@ System::IConnectable::ConnectionInfo CMqttConnection::getClientInfo() const
 
 ///------- IMqttConnection implementation--------
 
-const std::shared_ptr<Common::TEventConsumer<TMqttEventVariant>> CMqttConnection::getEventLoop() const
+const std::shared_ptr<Common::TEventConsumer<TMqttEventVariant>> CMqttConnection::getEventContext() const
 {
     return m_event_loop;
 }

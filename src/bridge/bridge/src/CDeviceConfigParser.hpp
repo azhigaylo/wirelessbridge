@@ -7,34 +7,38 @@
 
 #pragma once
 
+#include <memory>
 #include <string>
+#include <vector>
 
 namespace WBridge
 {
 
-
-            "input_mqtt_topic": "home\/external\/weather_station\/status\/weather_station",
-            "output_mqtt_topic": "home\/external\/weather_station\/control\/weather_station",
-            "status_mqtt_topic": "home\/status\/mqtt\/communication\/weather_station",
-            "node_timeout_in_sec": "10",
-
-
 class CDeviceConfigParser final
 {
-
 public:
-
-    struct router_item_t
+    struct RouterDeviceChannel
     {
         typedef std::pair <std::uint16_t, std::string> mapp_item_t;
 
-        bool        topic_sub;
         uint32_t    number;
+        std::string name;
         std::string mqtt_topic;
-        std::vector<mapp_item_t> mapping;
+        bool        mqtt_subscribe;
+        std::vector<mapp_item_t> value_mapping;
     };
 
-    typedef std::pair <std::string, router_item_t> bridge_item_t;
+    struct RouterDeviceItem
+    {
+        std::string dev_name;
+        std::string input_mqtt_topic;
+        std::string output_mqtt_topic;
+        std::string status_mqtt_topic;
+        uint32_t    node_timeout_in_sec;
+
+        std::vector<RouterDeviceChannel> input_mapping;
+        std::vector<RouterDeviceChannel> output_mapping;
+    };
 
     ///
     /// @brief constructor
@@ -45,46 +49,18 @@ public:
     ///
     /// @brief CMqttConnection default destructor
     ///
-    ~CDeviceConfigParser() noexcept final;
+    ~CDeviceConfigParser() noexcept;
 
-    ///
-    /// @brief CMqttConnection remove copy and operators
-    ///
-    CDeviceConfigParser(const CDeviceConfigParser&) = delete;
-    CDeviceConfigParser& operator=(const CDeviceConfigParser&) = delete;
-
-
-    const std::vector<bridge_item_t>& getGwtTable()const {return m_bridge_vector; }
+    const std::vector<RouterDeviceItem>& getGwtTable()const {return m_wb_vector; }
 
     uint32_t getDeviceAmount()const {return m_device_amount;}
 
-/*
-    ///
-    /// @brief get list of the components name
-    /// @return list of the components name
-    ///
-    std::vector<std::string> getComponentList() const final;
-
-    ///
-    /// @brief get config for selected component
-    /// @param cmp_name component name
-    /// @return component library path
-    ///
-    std::string getComponentLib(std::string const cmp_name) final;
-
-    ///
-    /// @brief get config for selected component
-    /// @param cmp_name component name
-    /// @return component configuration
-    ///
-    boost::property_tree::ptree getComponentConfig(std::string const cmp_name) final;
-*/
-
 private:
-
-    std::vector<bridge_item_t> m_bridge_vector;
     uint32_t m_device_amount;
+    std::vector<RouterDeviceItem> m_wb_vector;
 };
+
+using CDeviceConfigParserPtr = std::shared_ptr<CDeviceConfigParser>;
 
 } //namespace WBridge
 

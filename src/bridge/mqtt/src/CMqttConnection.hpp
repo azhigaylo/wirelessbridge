@@ -125,7 +125,7 @@ public:
     /// @brief get event queue context
     /// @return context which contain event queue
     ///
-    const std::shared_ptr<Common::TEventConsumer<TMqttEventVariant>> getEventLoop() const final;
+    const std::shared_ptr<Common::TEventConsumer<TMqttEventVariant>> getEventContext() const final;
 
     ///
     /// @brief subscribe on mqtt topic
