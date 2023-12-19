@@ -11,6 +11,8 @@
 #include <string>
 #include <vector>
 
+#include <boost/optional.hpp>
+
 namespace WBridge
 {
 
@@ -35,6 +37,7 @@ public:
         std::string output_mqtt_topic;
         std::string status_mqtt_topic;
         uint32_t    node_timeout_in_sec;
+        uint32_t    node_connection_attempt;
 
         std::vector<RouterDeviceChannel> input_mapping;
         std::vector<RouterDeviceChannel> output_mapping;
@@ -51,12 +54,20 @@ public:
     ///
     ~CDeviceConfigParser() noexcept;
 
-    const std::vector<RouterDeviceItem>& getGwtTable()const {return m_wb_vector; }
+    ///
+    /// @brief constructor
+    /// @return device list
+    ///
+    std::vector<RouterDeviceItem> const& getGwtTable()const {return m_wb_vector; }
 
-    uint32_t getDeviceAmount()const {return m_device_amount;}
+    ///
+    /// @brief constructor
+    /// @param name device name
+    /// @return device annotation if available
+    ///
+    boost::optional<RouterDeviceItem> getGwtItem(std::string const name) const;
 
 private:
-    uint32_t m_device_amount;
     std::vector<RouterDeviceItem> m_wb_vector;
 };
 

@@ -9,6 +9,7 @@
             "output_mqtt_topic": "home\/external\/weather_station\/control\/weather_station",
             "status_mqtt_topic": "home\/status\/mqtt\/communication\/weather_station",
             "node_timeout_in_sec": "10",
+            "node_connection_attempt": "5",
 
             "input_mapping": [
                 {

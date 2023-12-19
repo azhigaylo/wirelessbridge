@@ -20,7 +20,7 @@
 #include "connman/IConnMan.hpp"
 #include "connman/IConnectable.hpp"
 
-#include "common/EventLoop.hpp"
+#include "events/EventLoop.hpp"
 
 IMPLEMENT_INTERFACE(MqttConn, Mqtt::IMqttConnection);
 

@@ -10,6 +10,7 @@
 #include <memory>
 #include <iostream>
 #include <stdexcept>
+#include <algorithm>
 
 #include <boost/filesystem.hpp>
 #include <boost/property_tree/json_parser.hpp>
@@ -21,14 +22,15 @@ namespace WBridge
 
 namespace Tbl
 {
-    const std::string c_wb_dev_list            = "wireless_list";
-    const std::string c_wb_dev_name            = "dev_name";
-    const std::string c_wb_input_mqtt_topic    = "input_mqtt_topic";
-    const std::string c_wb_output_mqtt_topic   = "output_mqtt_topic";
-    const std::string c_wb_status_mqtt_topic   = "status_mqtt_topic";
-    const std::string c_wb_node_timeout_in_sec = "node_timeout_in_sec";
-    const std::string c_wb_input_mapping       = "input_mapping";
-    const std::string c_wb_output_mapping      = "output_mapping";
+    const std::string c_wb_dev_list                = "wireless_list";
+    const std::string c_wb_dev_name                = "dev_name";
+    const std::string c_wb_input_mqtt_topic        = "input_mqtt_topic";
+    const std::string c_wb_output_mqtt_topic       = "output_mqtt_topic";
+    const std::string c_wb_status_mqtt_topic       = "status_mqtt_topic";
+    const std::string c_wb_node_timeout_in_sec     = "node_timeout_in_sec";
+    const std::string c_wb_node_connection_attempt = "node_connection_attempt";
+    const std::string c_wb_input_mapping           = "input_mapping";
+    const std::string c_wb_output_mapping          = "output_mapping";
 
     const std::string c_wb_subconfig_number            = "number";
     const std::string c_wb_subconfig_name              = "name";
@@ -65,6 +67,7 @@ CDeviceConfigParser::CDeviceConfigParser(std::string const cfg_path)
                 router_item.output_mqtt_topic = wb_item.second.get<std::string>(Tbl::c_wb_output_mqtt_topic);
                 router_item.status_mqtt_topic = wb_item.second.get<std::string>(Tbl::c_wb_status_mqtt_topic);
                 router_item.node_timeout_in_sec = wb_item.second.get<uint32_t>(Tbl::c_wb_node_timeout_in_sec);
+                router_item.node_connection_attempt = wb_item.second.get<uint32_t>(Tbl::c_wb_node_connection_attempt);
 
                 printDebug("CGtwTableParser/%s: found device d_name = %s", __FUNCTION__, router_item.dev_name.c_str());
 
@@ -130,6 +133,24 @@ CDeviceConfigParser::CDeviceConfigParser(std::string const cfg_path)
             throw std::runtime_error("configuration error: config parsing error" );
         }
     }
+}
+
+boost::optional<CDeviceConfigParser::RouterDeviceItem> CDeviceConfigParser::getGwtItem(std::string const name) const
+{
+    boost::optional<RouterDeviceItem> item{};
+
+    std::vector<RouterDeviceItem>::const_iterator m_wb_vector_itr{std::find_if(
+        m_wb_vector.begin(), m_wb_vector.end(), [name](RouterDeviceItem const data) {
+            return name == data.dev_name;
+        })};
+
+    if (m_wb_vector_itr != m_wb_vector.end())
+    {
+
+        item = boost::make_optional(*m_wb_vector_itr);
+    }
+
+    return item;
 }
 
 CDeviceConfigParser::~CDeviceConfigParser() noexcept

@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <unordered_map>
+
 #include "bridge/IWirelessBridge.hpp"
 
 #include "component/TDepends.hpp"
@@ -18,7 +20,7 @@
 #include "finalhaven/IFinalHaven.hpp"
 
 #include "mqtt/IMqttConnection.hpp"
-#include "common/EventListener.hpp"
+#include "events/EventListener.hpp"
 #include "CDeviceConfigParser.hpp"
 
 
@@ -45,6 +47,12 @@ class CWirelessBridge final
     , public HBE::TComponent<CWirelessBridgeAnnotation>
     , public std::enable_shared_from_this<CWirelessBridge>
 {
+    struct DevServiceBlk
+    {
+        uint32_t spent_attempt;
+        HBE::SysTimeMsec time_to_attempt;
+    };
+
 public:
     ///
     /// @brief constructor
@@ -88,9 +96,9 @@ public:
 private:
 
     ///
-    /// @brief callback from mqtt interface
+    /// @brief create device list based on config
     ///
-    void mqttEventProcessFunc(const std::unique_ptr<Mqtt::TMqttEventVariant>& ev);
+    void createDeviceList();
 
     ///
     /// @brief subscribe mqtt topics
@@ -98,9 +106,14 @@ private:
     void mqttSubscribe() const;
 
     ///
+    /// @brief callback from mqtt interface
+    ///
+    void mqttEventProcessFunc(const std::unique_ptr<Mqtt::TMqttEventVariant>& ev);
+
+    ///
     /// @brief iterable method
     ///
-    void processDeviceList() const;
+    void processDeviceList();
 
 private:
     Depends                  m_dependencies;
@@ -110,5 +123,6 @@ private:
     CDeviceConfigParserPtr   m_dev_cfg;
 
     Common::TEventHolderListener<Mqtt::TMqttEventVariant> m_mqtt_listener;
+    std::unordered_map<std::string, DevServiceBlk> m_device_items;
 };
 } // namespace WBridge
