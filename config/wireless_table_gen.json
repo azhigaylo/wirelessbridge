@@ -29,7 +29,7 @@
                 {
                     "number": 2,
                     "name": "solar radiation",
-                    "mqtt_topic": "home\/status\/mqtt\/status\/weather_station\/wind_speed",
+                    "mqtt_topic": "home\/status\/mqtt\/status\/weather_station\/solar_radiation",
                     "mqtt_subscribe": "false",
                     "value_mapping": ""
                 },

@@ -116,6 +116,7 @@ private:
     Depends        m_dependencies;
     IFinalHavenPtr m_final_haven;
     IExecutorPtr   m_asinc_executor;
+    uint32_t       m_cyclic_func_id;
 
     std::mutex m_connection_mutex;
     std::unordered_map<std::string, ConServiceBlk> m_connectable_items;

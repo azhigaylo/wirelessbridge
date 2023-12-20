@@ -21,7 +21,7 @@
 
 #include "mqtt/IMqttConnection.hpp"
 #include "events/EventListener.hpp"
-#include "CDeviceConfigParser.hpp"
+#include "CDeviceConfig.hpp"
 
 
 IMPLEMENT_INTERFACE(WirelessBridge, WBridge::IWirelessBridge);
@@ -107,6 +107,7 @@ private:
 
     ///
     /// @brief callback from mqtt interface
+    /// @param ev - mqtt event
     ///
     void mqttEventProcessFunc(const std::unique_ptr<Mqtt::TMqttEventVariant>& ev);
 
@@ -115,14 +116,29 @@ private:
     ///
     void processDeviceList();
 
+    ///
+    /// @brief iterable method
+    /// @param topic - mqtt topic
+    /// @param msg - mqtt topic message
+    ///
+    void processTopicUpdate(std::string const topic, std::string const msg);
+
+    ///
+    /// @brief parse string and prepare vector of strings which divided by separator
+    /// @param msg - mqtt topic message
+    /// @return device annotation if available
+    ///
+    std::vector<std::string> processTopicUpdate(std::string const msg, char separator);
+
 private:
     Depends                  m_dependencies;
     System::IFinalHavenPtr   m_final_haven;
     System::IExecutorPtr     m_executor;
     Mqtt::IMqttConnectionPtr m_mqtt_conn;
-    CDeviceConfigParserPtr   m_dev_cfg;
+    CDeviceConfigPtr         m_dev_cfg;
+    uint32_t                 m_cyclic_func_id;
 
     Common::TEventHolderListener<Mqtt::TMqttEventVariant> m_mqtt_listener;
-    std::unordered_map<std::string, DevServiceBlk> m_device_items;
+    std::unordered_map<std::string, DevServiceBlk>        m_device_items;
 };
 } // namespace WBridge

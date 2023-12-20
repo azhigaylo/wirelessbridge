@@ -5,7 +5,7 @@
  * modify it under the terms of the MIT License
  */
 
-#include "CDeviceConfigParser.hpp"
+#include "CDeviceConfig.hpp"
 
 #include <memory>
 #include <iostream>
@@ -41,7 +41,7 @@ namespace Tbl
     const std::string c_wb_subconfig_mapping_value_str = "mapp_to";
 }
 
-CDeviceConfigParser::CDeviceConfigParser(std::string const cfg_path)
+CDeviceConfig::CDeviceConfig(std::string const cfg_path)
 {
     if (!boost::filesystem::exists(cfg_path))
     {
@@ -55,7 +55,7 @@ CDeviceConfigParser::CDeviceConfigParser(std::string const cfg_path)
             pt::ptree dev_ptree;
             pt::read_json(cfg_path, dev_ptree);
 
-            printDebug("CDeviceConfigParser/%s: device cfg path = %s", __FUNCTION__, cfg_path.c_str());
+            printDebug("CDeviceConfig/%s: device cfg path = %s", __FUNCTION__, cfg_path.c_str());
 
             // create discret point rouring table
             for (pt::ptree::value_type &wb_item : dev_ptree.get_child(Tbl::c_wb_dev_list))
@@ -127,15 +127,15 @@ CDeviceConfigParser::CDeviceConfigParser(std::string const cfg_path)
         }
         catch (const std::exception& e)
         {
-            printError("CDeviceConfigParser/%s: Error during parsing config: %s", __FUNCTION__, cfg_path.c_str());
-            printError("CDeviceConfigParser/%s: Error description: %s", __FUNCTION__, e.what());
+            printError("CDeviceConfig/%s: Error during parsing config: %s", __FUNCTION__, cfg_path.c_str());
+            printError("CDeviceConfig/%s: Error description: %s", __FUNCTION__, e.what());
 
             throw std::runtime_error("configuration error: config parsing error" );
         }
     }
 }
 
-boost::optional<CDeviceConfigParser::RouterDeviceItem> CDeviceConfigParser::getGwtItem(std::string const name) const
+boost::optional<CDeviceConfig::RouterDeviceItem> CDeviceConfig::getGwtItem(std::string const name) const
 {
     boost::optional<RouterDeviceItem> item{};
 
@@ -153,9 +153,9 @@ boost::optional<CDeviceConfigParser::RouterDeviceItem> CDeviceConfigParser::getG
     return item;
 }
 
-CDeviceConfigParser::~CDeviceConfigParser() noexcept
+CDeviceConfig::~CDeviceConfig() noexcept
 {
-    printDebug("CDeviceConfigParser/%s: removed...", __FUNCTION__);
+    printDebug("CDeviceConfig/%s: removed...", __FUNCTION__);
 }
 
 } //namespase WBridge

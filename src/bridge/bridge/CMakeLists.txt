@@ -15,7 +15,7 @@ endif()
 
 add_library(${PROJECT_NAME} SHARED
     ${CMAKE_CURRENT_SOURCE_DIR}/src/CWirelessBridge.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/CDeviceConfigParser.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/CDeviceConfig.cpp
     )
 
 target_include_directories(${PROJECT_NAME}

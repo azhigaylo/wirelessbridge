@@ -17,8 +17,7 @@ CExecutor::CExecutor(const ConfigType& /*cfg*/, const HBE::ResolvedDependencies 
     , m_io_service{std::make_shared<boost::asio::io_service>()}
     , m_work_object{std::make_shared<boost::asio::io_service::work>(*m_io_service)}
 {
-    //std::cout << __func__ << ": " << cfg.c_str() << std::endl;
-
+    printDebug("CExecutor/%s: created...", __FUNCTION__);
 }
 
 CExecutor::~CExecutor()
@@ -32,7 +31,7 @@ CExecutor::~CExecutor()
         printError("CExecutor/%s: Failed to stop in destructor: %s", __FUNCTION__, ex.what());
     }
 
-    printDebug("CExecutor/%s: deleted ...", __FUNCTION__);
+    printDebug("CExecutor/%s: deleted.", __FUNCTION__);
 }
 
 void CExecutor::startComponent()
@@ -133,6 +132,7 @@ void CExecutor::stop_cyclic(uint32_t cyclic_id)
         if (cycle_itr != m_cycle_items.end())
         {
             m_cycle_items.erase(cycle_itr);
+            printDebug("CExecutor/%s: cyclic function id = %i stopped", __FUNCTION__, cyclic_id);
         }
     }
 }

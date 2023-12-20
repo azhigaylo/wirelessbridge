@@ -16,7 +16,7 @@
 namespace WBridge
 {
 
-class CDeviceConfigParser final
+class CDeviceConfig final
 {
 public:
     struct RouterDeviceChannel
@@ -47,12 +47,12 @@ public:
     /// @brief constructor
     /// @param cfg_path configuration path
     ///
-    explicit CDeviceConfigParser(std::string const cfg_path);
+    explicit CDeviceConfig(std::string const cfg_path);
 
     ///
     /// @brief CMqttConnection default destructor
     ///
-    ~CDeviceConfigParser() noexcept;
+    ~CDeviceConfig() noexcept;
 
     ///
     /// @brief constructor
@@ -71,7 +71,7 @@ private:
     std::vector<RouterDeviceItem> m_wb_vector;
 };
 
-using CDeviceConfigParserPtr = std::shared_ptr<CDeviceConfigParser>;
+using CDeviceConfigPtr = std::shared_ptr<CDeviceConfig>;
 
 } //namespace WBridge
 

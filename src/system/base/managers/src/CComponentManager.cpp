@@ -15,7 +15,7 @@ CComponentManager::CComponentManager(ILoaderFactoryPtr loader_fct)
 
 CComponentManager::~CComponentManager()
 {
-    printDebug("CComponentManager/%s: clousing...", __FUNCTION__);
+    printDebug("CComponentManager/%s: closing...", __FUNCTION__);
 }
 
 void CComponentManager::registerComponent(ComponentConfig const config)

@@ -9,23 +9,25 @@
 
 #include <iostream>
 
+#include "common/slog.h"
+
 namespace System {
 
 CFinalHaven::CFinalHaven(const ConfigType& /*cfg*/, const HBE::ResolvedDependencies /*dependencies*/)
     : m_err_queue (std::chrono::milliseconds(static_cast<int>(intCfg::err_queue_timeout_ms)))
 {
-    //std::cout << __func__ << ": " << cfg.c_str() << std::endl;
-
     // Setup signal handlers
     signalHandlerWrapper = std::bind(&CFinalHaven::signalHandlerLocal,
                                  this,
                                  std::placeholders::_1);
     configureSignalHandlers();
+
+    printDebug("CFinalHaven/%s: created...", __FUNCTION__);
 }
 
 CFinalHaven::~CFinalHaven()
 {
-    std::cout << __func__ << ": deleted ..." << std::endl;
+    printDebug("CFinalHaven/%s: deleted.", __FUNCTION__);
 }
 
 void CFinalHaven::report(ErrorLevel err_level, std::string error_descr)

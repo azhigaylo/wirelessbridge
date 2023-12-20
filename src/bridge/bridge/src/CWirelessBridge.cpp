@@ -18,7 +18,8 @@ CWirelessBridge::CWirelessBridge(const ConfigType& cfg, const HBE::ResolvedDepen
     , m_final_haven{m_dependencies.getInterface<FinalHaven>().lock()}
     , m_executor{m_dependencies.getInterface<Executor>().lock()}
     , m_mqtt_conn{m_dependencies.getInterface<MqttConn>().lock()}
-    , m_dev_cfg{std::make_shared<CDeviceConfigParser>(cfg.get<std::string>("config.bridge_cfg_path"))}
+    , m_dev_cfg{std::make_shared<CDeviceConfig>(cfg.get<std::string>("config.bridge_cfg_path"))}
+    , m_cyclic_func_id{0}
     , m_mqtt_listener{
         m_mqtt_conn,
         boost::bind(&CWirelessBridge::mqttEventProcessFunc, this, _1)
@@ -29,6 +30,9 @@ CWirelessBridge::CWirelessBridge(const ConfigType& cfg, const HBE::ResolvedDepen
 
 CWirelessBridge::~CWirelessBridge() noexcept
 {
+    // stop cyclic iteration
+    m_executor->stop_cyclic(m_cyclic_func_id);
+
     printDebug("CWirelessBridge/%s: deleted.", __FUNCTION__);
 }
 
@@ -46,27 +50,31 @@ void CWirelessBridge::startComponent()
     // subscribe all topics
     mqttSubscribe();
     // start device processing
-    m_executor->execute_cyclic(std::bind(&CWirelessBridge::processDeviceList, this), std::chrono::milliseconds{1000});
+    m_cyclic_func_id = m_executor->execute_cyclic(
+        std::bind(&CWirelessBridge::processDeviceList, this),
+        std::chrono::milliseconds{1000});
 }
 
 ///------- implementation-------------
 
 void CWirelessBridge::createDeviceList()
 {
-    const std::vector<CDeviceConfigParser::RouterDeviceItem>& gtw_table = m_dev_cfg->getGwtTable();
+    const std::vector<CDeviceConfig::RouterDeviceItem>& gtw_table = m_dev_cfg->getGwtTable();
 
     // subscribe all topics
     for (auto r_itm: gtw_table)
     {
         printDebug("CMqttConnection/%s: process : %s", __FUNCTION__, r_itm.dev_name.c_str());
         // subscribe main topic
-        m_device_items.emplace(std::make_pair(r_itm.dev_name, DevServiceBlk{0, HBE::getSystemTimeMsec()}));
+        m_device_items.emplace(std::make_pair(
+            r_itm.dev_name,
+            DevServiceBlk{0, HBE::getSystemTimeMsec() + std::chrono::seconds{r_itm.node_timeout_in_sec}}));
     }
 }
 
 void CWirelessBridge::mqttSubscribe() const
 {
-    const std::vector<CDeviceConfigParser::RouterDeviceItem>& gtw_table = m_dev_cfg->getGwtTable();
+    const std::vector<CDeviceConfig::RouterDeviceItem>& gtw_table = m_dev_cfg->getGwtTable();
 
     // subscribe all topics
     for (auto r_itm: gtw_table)
@@ -116,6 +124,8 @@ void CWirelessBridge::mqttEventProcessFunc(const std::unique_ptr<Mqtt::TMqttEven
             std::string message = boost::get<Mqtt::CMqttTopicUpdateEvent>(mqtt_ev).getMessage();
 
             printDebug("CWirelessBridge/%s: topic: %s | msg: %s", __FUNCTION__, topic.c_str(), message.c_str());
+
+            processTopicUpdate(topic, message);
         }
     }
     catch (const std::exception& e)
@@ -138,7 +148,7 @@ void CWirelessBridge::processDeviceList()
 
         for(auto item = m_device_items.begin(); item != m_device_items.end(); ++item)
         {
-            boost::optional<CDeviceConfigParser::RouterDeviceItem> gtw_device{m_dev_cfg->getGwtItem(item->first)};
+            boost::optional<CDeviceConfig::RouterDeviceItem> gtw_device{m_dev_cfg->getGwtItem(item->first)};
 
             if (gtw_device)
             {
@@ -174,6 +184,69 @@ void CWirelessBridge::processDeviceList()
         // store exception and push it to error manager through iterate method
         m_final_haven->report(System::ErrorLevel::component_level, ss_msg.str());
     }
+}
+
+void CWirelessBridge::processTopicUpdate(std::string const topic, std::string const msg)
+{
+    const std::vector<CDeviceConfig::RouterDeviceItem>& gtw_table = m_dev_cfg->getGwtTable();
+
+    // subscribe all topics
+    for (auto r_itm: gtw_table)
+    {
+        if (topic == r_itm.input_mqtt_topic)
+        {
+            printDebug("CWirelessBridge/%s: topic found !!!", __FUNCTION__);
+            // store last dts state
+            if (auto itm = m_device_items.find(r_itm.dev_name); itm != m_device_items.end())
+            {
+                itm->second.spent_attempt = 0;
+                itm->second.time_to_attempt = HBE::getSystemTimeMsec() + std::chrono::seconds{r_itm.node_timeout_in_sec};
+
+                // update inputs
+                if (std::vector<std::string> data{processTopicUpdate(msg, ',')}; data.size() == r_itm.input_mapping.size())
+                {
+                    for (auto r_itm_inp: r_itm.input_mapping)
+                    {
+                        // remap values to strings
+                        if (false == r_itm_inp.value_mapping.empty())
+                        {
+                            for(auto map_item: r_itm_inp.value_mapping)
+                            {
+                                if (map_item.first == std::stoi(data[r_itm_inp.number]))
+                                {
+                                    m_mqtt_conn->setTopic(r_itm_inp.mqtt_topic, map_item.second);
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                        else
+                        {
+                            m_mqtt_conn->setTopic(r_itm_inp.mqtt_topic, data[r_itm_inp.number]);
+                        }
+                    }
+                }
+
+                // update status topic
+                m_mqtt_conn->setTopic(r_itm.status_mqtt_topic, "ok");
+            }
+        }
+    }
+}
+
+std::vector<std::string> CWirelessBridge::processTopicUpdate(std::string const msg, char separator)
+{
+    std::vector<std::string> result;
+
+    // parse incoming message
+    std::stringstream ss_topics(msg);
+    while (ss_topics.good())
+    {
+        std::string col_value;
+        std::getline (ss_topics, col_value, separator);
+        result.push_back(col_value);
+    }
+    return result;
 }
 
 } // namespace WBridge

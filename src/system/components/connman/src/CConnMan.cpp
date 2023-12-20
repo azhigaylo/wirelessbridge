@@ -11,13 +11,17 @@ CConnMan::CConnMan(const ConfigType& /*cfg*/, const HBE::ResolvedDependencies de
     : m_dependencies{dependencies}
     , m_final_haven(m_dependencies.getInterface<FinalHaven>().lock())
     , m_asinc_executor{m_dependencies.getInterface<Executor>().lock()}
+    , m_cyclic_func_id{m_asinc_executor->execute_cyclic(std::bind(&CConnMan::connectionHandler, this), std::chrono::milliseconds{100})}
 {
-    m_asinc_executor->execute_cyclic(std::bind(&CConnMan::connectionHandler, this), std::chrono::milliseconds{100});
+    printDebug("CConnMan/%s: created...", __FUNCTION__);
 }
 
 CConnMan::~CConnMan()
 {
-    printDebug("CConnMan/%s: deleted ...", __FUNCTION__);
+    // stop cyclic iteration
+    m_asinc_executor->stop_cyclic(m_cyclic_func_id);
+
+    printDebug("CConnMan/%s: deleted.", __FUNCTION__);
 }
 
 void CConnMan::subscribe(std::string name, IConnectableWPtr const client)
@@ -27,7 +31,7 @@ void CConnMan::subscribe(std::string name, IConnectableWPtr const client)
 
     if (false == itm)
     {
-        m_final_haven->report(ErrorLevel::system_level, std::string("CConnMan error - duble insertion !"));
+        m_final_haven->report(ErrorLevel::system_level, std::string("CConnMan error - double insertion !"));
     }
     else
     {
