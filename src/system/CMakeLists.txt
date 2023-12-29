@@ -5,4 +5,5 @@ add_subdirectory(utils)
 add_subdirectory(base)
 add_subdirectory(events)
 add_subdirectory(components)
+add_subdirectory(launcher)
 
