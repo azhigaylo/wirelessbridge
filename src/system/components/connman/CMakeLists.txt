@@ -22,6 +22,7 @@ target_link_libraries(${PROJECT_NAME}
     Boost::boost
     Boost::thread
     loger
+    utils
     basis
     finalhaven
     executor

@@ -18,7 +18,7 @@
 #include "finalhaven/IFinalHaven.hpp"
 #include "executor/IExecutor.hpp"
 
-#include "common/SysTime.hpp"
+#include "utils/SysTime.hpp"
 
 IMPLEMENT_INTERFACE(ConnMan, System::IConnMan);
 

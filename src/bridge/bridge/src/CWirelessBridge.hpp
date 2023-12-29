@@ -15,7 +15,7 @@
 #include "component/TComponent.hpp"
 #include "interface/TInterfaces.hpp"
 
-#include "common/SysTime.hpp"
+#include "utils/SysTime.hpp"
 #include "executor/IExecutor.hpp"
 #include "finalhaven/IFinalHaven.hpp"
 
