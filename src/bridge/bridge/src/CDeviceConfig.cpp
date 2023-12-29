@@ -15,7 +15,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/property_tree/json_parser.hpp>
 
-#include "common/slog.h"
+#include "loger/slog.h"
 
 namespace WBridge
 {

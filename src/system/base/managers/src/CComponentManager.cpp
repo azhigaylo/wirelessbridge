@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-#include "common/slog.h"
+#include "loger/slog.h"
 #include "managers/CComponentRegisterException.hpp"
 
 namespace HBE {

@@ -6,14 +6,16 @@
  */
 
 //------------------------------------------------------------------------------
+#include "loger/slog.h"
+
 #include <stdarg.h>
-#include <inttypes.h>
 #include <syslog.h>
-#include <cstdio>
 #include <string.h>
+#include <inttypes.h>
+
+#include <cstdio>
 #include <iostream>
 
-#include "common/slog.h"
 #include "dlt/dlt.h"
 
 //-------------------------------------------------------------------------------
@@ -23,7 +25,7 @@ using namespace std;
 static volatile int32_t optv = MSG_DBG;
 static volatile int32_t dbg_sink = TRACE_SINK_CONSOLE;
 
-//DLT_DECLARE_CONTEXT(dlt_context);
+DLT_DECLARE_CONTEXT(dlt_context);
 
 //---------------------------------CONSOLE---------------------------------------
 
@@ -58,32 +60,32 @@ void printDebugConsole(const char *msg)
 
 //---------------------------------DLT-------------------------------------------
 
-void printErrorDlt(const char */*msg*/)
+void printErrorDlt(const char *msg)
 {
-   //DLT_LOG(dlt_context, DLT_LOG_ERROR, DLT_STRING(msg));
+   DLT_LOG(dlt_context, DLT_LOG_ERROR, DLT_STRING(msg));
 }
 
-void printWarningDlt(const char */*msg*/)
+void printWarningDlt(const char *msg)
 {
    if (optv > 0)
    {
-      //DLT_LOG(dlt_context, DLT_LOG_WARN, DLT_STRING(msg));
+      DLT_LOG(dlt_context, DLT_LOG_WARN, DLT_STRING(msg));
    }
 }
 
-void printInfoDlt(const char */*msg*/)
+void printInfoDlt(const char *msg)
 {
    if (optv > 1)
    {
-      //DLT_LOG(dlt_context, DLT_LOG_INFO, DLT_STRING(msg));
+      DLT_LOG(dlt_context, DLT_LOG_INFO, DLT_STRING(msg));
    }
 }
 
-void printDebugDlt(const char */*msg*/)
+void printDebugDlt(const char *msg)
 {
    if (optv > 2)
    {
-      //DLT_LOG(dlt_context, DLT_LOG_DEBUG, DLT_STRING(msg));
+      DLT_LOG(dlt_context, DLT_LOG_DEBUG, DLT_STRING(msg));
    }
 }
 
@@ -106,17 +108,17 @@ int getDbgSink()
 
 void initDlt()
 {
-   //DLT_REGISTER_APP("GTW","Mqtt gateway trace");
-   //DLT_REGISTER_CONTEXT(dlt_context,"GTW","gateway app");
+   DLT_REGISTER_APP("WB","Wirelessbridge trace");
+   DLT_REGISTER_CONTEXT(dlt_context,"WB","wirelessbridge app");
 
    usleep(10000);
 }
 
 void deinitDlt()
 {
-    //DLT_UNREGISTER_CONTEXT(dlt_context);
+    DLT_UNREGISTER_CONTEXT(dlt_context);
 
-    //DLT_UNREGISTER_APP();
+    DLT_UNREGISTER_APP();
 }
 
 void printError(const char * const fmt,...)

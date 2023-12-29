@@ -15,7 +15,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/program_options.hpp>
 
-#include "common/slog.h"
+#include "loger/slog.h"
 
 #include "component/IComponent.hpp"
 #include "component/IComponentFactory.hpp"

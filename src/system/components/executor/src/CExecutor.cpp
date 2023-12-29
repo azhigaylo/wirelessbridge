@@ -6,7 +6,7 @@
 #include <iostream>
 #include <boost/bind.hpp>
 
-#include "common/slog.h"
+#include "loger/slog.h"
 
 namespace System
 {

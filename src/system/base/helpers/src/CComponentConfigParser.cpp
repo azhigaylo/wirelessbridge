@@ -13,7 +13,7 @@
 
 #include <boost/filesystem.hpp>
 
-#include "common/slog.h"
+#include "loger/slog.h"
 
 namespace HBE
 {

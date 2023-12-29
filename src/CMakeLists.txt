@@ -23,6 +23,7 @@ target_link_libraries(${PROJECT_NAME}
     Boost::program_options
     Boost::thread
     Boost::system
+    loger
     basis
     finalhaven
     connman

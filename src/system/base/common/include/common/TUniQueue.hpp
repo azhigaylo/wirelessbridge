@@ -7,7 +7,7 @@
 #include <type_traits>
 #include <boost/optional.hpp>
 
-#include "slog.h"
+#include "loger/slog.h"
 
 namespace HBE {
 

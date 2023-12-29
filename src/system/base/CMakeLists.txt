@@ -7,7 +7,6 @@ message("basis...")
 find_package(AutomotiveDlt 2.15)
 
 add_library(${PROJECT_NAME} STATIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/common/src/slog.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/common/src/SysTime.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/helpers/src/CComponentConfigParser.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/managers/src/CComponentLoader.cpp
@@ -28,6 +27,7 @@ target_include_directories(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME}
     ${AutomotiveDlt_LIBRARY}
     ${CMAKE_DL_LIBS}
+    loger
     Boost::boost
     Boost::system
     Boost::filesystem

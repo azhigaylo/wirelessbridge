@@ -21,6 +21,7 @@ target_include_directories(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME}
     Boost::boost
     Boost::thread
+    loger
     basis
     finalhaven
     executor

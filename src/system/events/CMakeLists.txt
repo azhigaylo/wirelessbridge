@@ -20,5 +20,6 @@ target_link_libraries(${PROJECT_NAME}
     ${CMAKE_DL_LIBS}
     Boost::boost
     Boost::thread
+    loger
     basis
     )
