@@ -4,7 +4,7 @@ project(utils LANGUAGES CXX)
 
 message("utils...")
 
-add_library(${PROJECT_NAME} STATIC
+add_library(${PROJECT_NAME} SHARED
     ${CMAKE_CURRENT_SOURCE_DIR}/src/SysTime.cpp
     )
 

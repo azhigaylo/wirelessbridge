@@ -4,7 +4,7 @@ project(events LANGUAGES CXX)
 
 message("events...")
 
-add_library(${PROJECT_NAME} STATIC
+add_library(${PROJECT_NAME} SHARED
     ${CMAKE_CURRENT_SOURCE_DIR}/src/EventContext.cpp
     )
 

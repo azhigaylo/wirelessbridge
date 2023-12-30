@@ -36,13 +36,13 @@ CLauncher::CLauncher(AppDebugInfo const& debug_data, std::string const& cfg)
     if (TRACE_SINK_DLT == getDbgSink())
     {
         initDlt();
-        printDebug("CLauncher/%s: Dlt inited...", __FUNCTION__);
+        printInfo("CLauncher/%s: Dlt inited...", __FUNCTION__);
     }
 
-    printDebug("CLauncher/%s: debug level = %i", __FUNCTION__, m_debug_level);
-    printDebug("CLauncher/%s: debug sink = %i", __FUNCTION__, m_debug_sink);
-    printDebug("CLauncher/%s: started with cfg = %s", __FUNCTION__, m_config_file.c_str());
-    printDebug("CLauncher/%s: created...", __FUNCTION__);
+    printInfo("CLauncher/%s: debug level = %i", __FUNCTION__, m_debug_level);
+    printInfo("CLauncher/%s: debug sink = %i", __FUNCTION__, m_debug_sink);
+    printInfo("CLauncher/%s: started with cfg = %s", __FUNCTION__, m_config_file.c_str());
+    printInfo("CLauncher/%s: created...", __FUNCTION__);
 }
 
 CLauncher::~CLauncher()
@@ -50,15 +50,15 @@ CLauncher::~CLauncher()
     if (TRACE_SINK_DLT == getDbgSink())
     {
         deinitDlt();
-        printDebug("CLauncher/%s: Dlt deinited...", __FUNCTION__);
+        printInfo("CLauncher/%s: Dlt deinited...", __FUNCTION__);
     }
 
-    printDebug("CLauncher/%s: deleted.", __FUNCTION__);
+    printInfo("CLauncher/%s: deleted.", __FUNCTION__);
 }
 
 int CLauncher::startApplication()
 {
-    printDebug("CLauncher/%s: application starting...", __FUNCTION__);
+    printInfo("CLauncher/%s: application starting...", __FUNCTION__);
 
     try
     {
@@ -95,7 +95,7 @@ int CLauncher::startApplication()
 
                 if (fh)
                 {
-                    printDebug("CLauncher/%s: interface IFinalHaven fond...", __FUNCTION__);
+                    printInfo("CLauncher/%s: interface IFinalHaven fond...", __FUNCTION__);
 
                     bool exit_request = false;
                     while(!exit_request)
@@ -106,7 +106,7 @@ int CLauncher::startApplication()
                         std::string descr;
                         std::tie(lvl, descr) = fut.get();
 
-                        printDebug("CLauncher/%s: got an action = %s", __FUNCTION__, descr.c_str());
+                        printInfo("CLauncher/%s: got an action = %s", __FUNCTION__, descr.c_str());
 
                         switch (lvl)
                         {
@@ -127,12 +127,12 @@ int CLauncher::startApplication()
     }
     catch (const std::exception& e)
     {
-        printDebug("CLauncher/%s: Error description: %s", __FUNCTION__, e.what());
+        printError("CLauncher/%s: Error description: %s", __FUNCTION__, e.what());
         return EXIT_FAILURE;
     }
 
     // after "exit" action
-    printDebug("CLauncher/%s: application stopped...", __FUNCTION__);
+    printInfo("CLauncher/%s: application stopped...", __FUNCTION__);
 
     return EXIT_SUCCESS;
 }

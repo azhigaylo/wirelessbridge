@@ -6,7 +6,7 @@ message("loger...")
 
 find_package(AutomotiveDlt 2.15)
 
-add_library(${PROJECT_NAME} STATIC
+add_library(${PROJECT_NAME} SHARED
     ${CMAKE_CURRENT_SOURCE_DIR}/src/slog.cpp
     )
 
