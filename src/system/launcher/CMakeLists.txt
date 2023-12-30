@@ -4,7 +4,7 @@ project(launcher LANGUAGES CXX)
 
 message("launcher...")
 
-add_library(${PROJECT_NAME} STATIC
+add_library(${PROJECT_NAME} SHARED
     ${CMAKE_CURRENT_SOURCE_DIR}/src/CLauncher.cpp
     )
 
