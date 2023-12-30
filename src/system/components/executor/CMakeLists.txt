@@ -19,9 +19,9 @@ target_include_directories(${PROJECT_NAME}
     )
 
 target_link_libraries(${PROJECT_NAME}
-    Boost::boost
-    Boost::thread
-    loger
-    basis
-    finalhaven
+    PRIVATE Boost::boost
+    PRIVATE Boost::thread
+    PRIVATE loger
+    PRIVATE basis
+    PRIVATE finalhaven
     )

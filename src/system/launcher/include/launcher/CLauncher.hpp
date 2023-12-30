@@ -9,8 +9,6 @@
 #include <cstdint>
 #include <cstdlib>
 
-#include "managers/ComponentManagerFactory.hpp"
-
 namespace System
 {
 ///

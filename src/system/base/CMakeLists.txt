@@ -21,9 +21,9 @@ target_include_directories(${PROJECT_NAME}
     )
 
 target_link_libraries(${PROJECT_NAME}
-    ${CMAKE_DL_LIBS}
-    loger
-    Boost::boost
-    Boost::system
-    Boost::filesystem
+    PRIVATE ${CMAKE_DL_LIBS}
+    PRIVATE loger
+    PRIVATE Boost::boost
+    PRIVATE Boost::system
+    PRIVATE Boost::filesystem
     )

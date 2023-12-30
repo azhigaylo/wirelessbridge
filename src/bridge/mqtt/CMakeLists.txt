@@ -23,12 +23,12 @@ target_include_directories(${PROJECT_NAME}
     )
 
 target_link_libraries(${PROJECT_NAME}
-    loger
-    basis
-    common
-    finalhaven
-    connman
-    Boost::boost
-    Boost::thread
-    ${mosquittopp_LIBRARY}
+    PRIVATE loger
+    PRIVATE basis
+    PRIVATE events
+    PRIVATE finalhaven
+    PRIVATE connman
+    PRIVATE Boost::boost
+    PRIVATE Boost::thread
+    PRIVATE ${mosquittopp_LIBRARY}
     )

@@ -21,12 +21,6 @@ add_executable(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME}
     Boost::boost
     Boost::program_options
-    Boost::thread
     Boost::system
     launcher
-    loger
-    basis
-    finalhaven
-    connman
-    bridge
     )
