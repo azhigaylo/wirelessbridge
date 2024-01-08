@@ -2,7 +2,7 @@
     "components": [
         {
             "name": "final_haven",
-            "lib_path": "system/components/finalhaven/libfinalhaven.so",
+            "lib_path": "/opt/lib/wirelessbridge/libfinalhaven.so",
             "config": {
                 "config": {
                     "data": "long long string"
@@ -11,7 +11,7 @@
         },
         {
             "name": "executor",
-            "lib_path": "system/components/executor/libexecutor.so",
+            "lib_path": "/opt/lib/wirelessbridge/libexecutor.so",
             "config": {
                 "config": {
                     "data": "long long string"
@@ -20,7 +20,7 @@
         },
         {
             "name": "connman",
-            "lib_path": "system/components/connman/libconnman.so",
+            "lib_path": "/opt/lib/wirelessbridge/libconnman.so",
             "config": {
                 "config": {
                     "data": "long long string"
@@ -29,27 +29,25 @@
         },
         {
             "name": "mqttconn",
-            "lib_path": "bridge/mqtt/libmqttconn.so",
+            "lib_path": "/opt/lib/wirelessbridge/libmqttconn.so",
             "config": {
                 "config": {
-                    "mqtt_broker": "192.168.0.105",
+                    "mqtt_broker": "192.168.88.10",
                     "mqtt_broker_port": 8097,
-                    "mqtt_username": "homebrain",
+                    "mqtt_username": "test1",
                     "mqtt_password": "123!@#"
                 }
             }
         },
         {
             "name": "bridge",
-            "lib_path": "bridge/bridge/libbridge.so",
+            "lib_path": "/opt/lib/wirelessbridge/libbridge.so",
             "config": {
                 "config": {
-                    "bridge_path": "wireless_table_gen.json"
+                    "bridge_cfg_path": "/mnt/data/project/wireless_table_gen.json"
                 }
             }
         }
     ]
 }
-
-
 

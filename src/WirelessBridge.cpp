@@ -19,7 +19,7 @@ int main(int argc, const char** argv)
     boost::filesystem::path config_file;
     boost::filesystem::path bridge_table_file;
 
-    boost::program_options::options_description desc("HomeBrain core <-> MQTT Wireless Bridge Component Options");
+    boost::program_options::options_description desc("MQTT Wireless Bridge Component Options");
     desc.add_options()
         ("help,h", "produce help message")
         ("debug,d", boost::program_options::value<uint32_t>(&debug_level), "debug level 0-4(err/wr/info/dbg")

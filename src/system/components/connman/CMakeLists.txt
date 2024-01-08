@@ -4,6 +4,13 @@ project(connman LANGUAGES CXX)
 
 message("connman...")
 
+# Include 'function(enable_cxx_compiler_flag_if_supported flag)'
+include(EnableCxxCompilerFlag)
+
+if(CMAKE_COMPILER_IS_GNUCXX)
+    enable_cxx_compiler_flag_if_supported(-fvisibility=hidden)
+endif()
+
 find_package(Boost REQUIRED COMPONENTS thread system)
 
 if(!Boost_FOUND)
