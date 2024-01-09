@@ -128,7 +128,7 @@ private:
     /// @param msg - mqtt topic message
     /// @return device annotation if available
     ///
-    std::vector<std::string> processTopicUpdate(std::string const msg, char separator);
+    std::vector<std::string> parseIncomingTopic(std::string const msg, char separator);
 
 private:
     Depends                  m_dependencies;

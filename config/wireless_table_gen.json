@@ -80,6 +80,22 @@
                             "mapp_to": "on"
                         }
                     ]
+                },
+                {
+                    "number": 1,
+                    "name": "greenhouse alarm",
+                    "mqtt_topic": "home\/control\/greenhouse\/alarm",
+                    "mqtt_subscribe": "true",
+                    "value_mapping": [
+                        {
+                            "value": "0",
+                            "mapp_to": "off"
+                        },
+                        {
+                            "value": "1",
+                            "mapp_to": "on"
+                        }
+                    ]
                 }
             ]
         }

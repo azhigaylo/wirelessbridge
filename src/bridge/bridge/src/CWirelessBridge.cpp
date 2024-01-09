@@ -195,7 +195,8 @@ void CWirelessBridge::processTopicUpdate(std::string const topic, std::string co
     {
         if (topic == r_itm.input_mqtt_topic)
         {
-            printDebug("CWirelessBridge/%s: topic found !!!", __FUNCTION__);
+            // // inputs update
+            printDebug("CWirelessBridge/%s: input topic updated !!!", __FUNCTION__);
             // store last dts state
             if (auto itm = m_device_items.find(r_itm.dev_name); itm != m_device_items.end())
             {
@@ -203,7 +204,7 @@ void CWirelessBridge::processTopicUpdate(std::string const topic, std::string co
                 itm->second.time_to_attempt = HBE::getSystemTimeMsec() + std::chrono::seconds{r_itm.node_timeout_in_sec};
 
                 // update inputs
-                if (std::vector<std::string> data{processTopicUpdate(msg, ',')}; data.size() == r_itm.input_mapping.size())
+                if (std::vector<std::string> data{parseIncomingTopic(msg, ',')}; data.size() == r_itm.input_mapping.size())
                 {
                     for (auto r_itm_inp: r_itm.input_mapping)
                     {
@@ -231,10 +232,42 @@ void CWirelessBridge::processTopicUpdate(std::string const topic, std::string co
                 m_mqtt_conn->setTopic(r_itm.status_mqtt_topic, "ok");
             }
         }
+        else
+        {
+            // outputs update
+            for (auto r_itm_out: r_itm.output_mapping)
+            {
+                if (topic == r_itm_out.mqtt_topic && false == r_itm.output_mqtt_topic.empty())
+                {
+                    printDebug("CWirelessBridge/%s: output topic updated !!!", __FUNCTION__);
+                    // remap values to strings
+                    if (false == r_itm_out.value_mapping.empty())
+                    {
+                        for(auto map_item: r_itm_out.value_mapping)
+                        {
+                            if (msg == map_item.second)
+                            {
+                                std::stringstream ss;
+                                ss << std::to_string(r_itm_out.number) << ":" << map_item.first;
+                                m_mqtt_conn->setTopic(r_itm.output_mqtt_topic, ss.str());
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        std::stringstream ss;
+                        ss << std::to_string(r_itm_out.number) << ":" << msg;
+                        m_mqtt_conn->setTopic(r_itm.output_mqtt_topic, ss.str());
+                    }
+                }
+            }
+        }
     }
 }
 
-std::vector<std::string> CWirelessBridge::processTopicUpdate(std::string const msg, char separator)
+std::vector<std::string> CWirelessBridge::parseIncomingTopic(std::string const msg, char separator)
 {
     std::vector<std::string> result;
 
