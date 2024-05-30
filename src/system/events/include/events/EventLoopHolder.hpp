@@ -9,7 +9,7 @@
 
 #include <memory>
 
-#include "EventConsumer.hpp"
+#include "EventLoop.hpp"
 
 namespace Common{
 
@@ -20,17 +20,33 @@ template <typename T>
 class TEventLoopHolder
 {
 public:
-
     ///
     /// @brief destructor for HudContext
     ///
     virtual ~TEventLoopHolder() noexcept = default;
 
     ///
-    /// @brief get event queue context
-    /// @return context which contain event queue
+    /// @brief get event consumer
+    /// @return event consumer
     ///
-    virtual const std::shared_ptr<Common::TEventConsumer<T>> getEventContext() const = 0;
+    const std::shared_ptr<Common::TEventConsumer<T>> getEventConsumer() const
+    {
+        return m_event_loop;
+    }
+
+protected:
+    ///
+    /// @brief get event sender
+    /// @return event sender
+    ///
+    const std::shared_ptr<Common::TEventSender<T>> getEventSender() const
+    {
+        return m_event_loop;
+    }
+
+private:
+
+    const std::shared_ptr<Common::TEventLoop<T>> m_event_loop{std::make_shared<Common::TEventLoop<T>>()};
 };
 
-} /// namespase Common
+} /// namespace Common

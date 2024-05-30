@@ -30,7 +30,7 @@ public:
 
     ///
     /// @brief get communication status
-    /// @return bool communication status (true - online / false - ofline)
+    /// @return bool communication status (true - online / false - offline)
     ///
     bool getCommStatus()const {return m_comm_status;}
 

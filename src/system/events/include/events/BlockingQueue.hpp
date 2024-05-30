@@ -13,6 +13,7 @@
 #include <mutex>
 #include <string>
 #include <atomic>
+#include <utility>
 #include <iostream>
 #include <condition_variable>
 
@@ -80,7 +81,7 @@ public:
 
         if (m_queue.size())
         {
-            item = std::move(m_queue.front());
+            item = std::forward<T>(m_queue.front());
             m_queue.pop();
         }
     }
@@ -92,7 +93,7 @@ public:
     void push(T&& item)
     {
         std::unique_lock<std::mutex> lock(m_queue_mutex);
-        m_queue.push(std::move(item));
+        m_queue.push(std::forward<T>(item));
         lock.unlock();
         m_queue_cond_var.notify_one();
     }

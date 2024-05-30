@@ -20,7 +20,7 @@ namespace Common{
 /// @brief event loop which implements queue
 ///
 template <typename T>
-class TEventLoop
+class TEventLoop final
     : public TEventConsumer<T>
     , public TEventSender<T>
 {
@@ -34,7 +34,7 @@ public:
     /// @brief add event in communication queue
     /// @param event - HUD event
     ///
-    void sendEvent(std::unique_ptr<T> ev)final
+    void sendEvent(std::unique_ptr<T> ev) final
     {
         m_queue.push(std::move(ev));
     }
@@ -43,7 +43,7 @@ public:
     /// @brief get event from communication queue
     /// @return first element in queue
     ///
-    std::unique_ptr<T> getEvent() final
+    std::unique_ptr<T> consumeEvent() final
     {
         std::unique_ptr<T> ev;
         m_queue.pop(ev);

@@ -22,7 +22,7 @@ public:
     ///
     /// @brief destructor
     ///
-    virtual ~TEventSender() = default;
+    virtual ~TEventSender() noexcept = default;
 
     ///
     /// @brief get event from communication queue

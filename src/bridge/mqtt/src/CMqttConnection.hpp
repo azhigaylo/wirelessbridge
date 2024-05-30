@@ -122,12 +122,6 @@ public:
     ///------- IMqttConnection implementation
 
     ///
-    /// @brief get event queue context
-    /// @return context which contain event queue
-    ///
-    const std::shared_ptr<Common::TEventConsumer<TMqttEventVariant>> getEventContext() const final;
-
-    ///
     /// @brief subscribe on mqtt topic
     /// @param topic mqtt topic name
     ///
@@ -151,7 +145,6 @@ private:
     System::IFinalHavenPtr m_final_haven;
     System::IConnManPtr    m_conn_man;
 
-    std::shared_ptr<Common::TEventLoop<TMqttEventVariant>> m_event_loop;
     std::atomic <System::IConnectable::EConnectionStatus> m_conn_status;
 
     CMqttConfig m_mqtt_cfg;
