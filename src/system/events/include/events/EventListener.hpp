@@ -24,7 +24,7 @@ namespace Common{
 template <typename T>
 class TEventListener
 {
-typedef boost::function<void (const std::unique_ptr<T>&)> TEventPrcFunc;
+typedef boost::function<void (const T&)> TEventPrcFunc;
 
 public:
     ///
@@ -70,16 +70,6 @@ public:
     ///
     TEventListener& operator=(TEventListener &&) = delete;
 
-    ///
-    /// @brief add event in communication queue
-    /// @param event - HUD event
-    ///
-
-    ///
-    /// @brief get event from communication queue
-    /// @return first element in queue
-    ///
-
 private:
 
     ///
@@ -93,7 +83,7 @@ private:
             {
                 if (std::shared_ptr<Common::TEventConsumer<T>> consumer = m_consumer.lock(); consumer)
                 {
-                    std::unique_ptr<T> ev{consumer->consumeEvent()};
+                    T ev{consumer->consumeEvent()};
                     if (ev)
                     {
                         m_event_prc_func(ev);
@@ -121,7 +111,7 @@ private:
 template <typename T>
 class TEventHolderListener
 {
-typedef boost::function<void (const std::unique_ptr<T>&)> TEventPrcFunc;
+typedef boost::function<void (const T&)> TEventPrcFunc;
 
 public:
     ///
@@ -166,16 +156,6 @@ public:
     ///
     TEventHolderListener& operator=(TEventHolderListener &&) = delete;
 
-    ///
-    /// @brief add event in communication queue
-    /// @param event - HUD event
-    ///
-
-    ///
-    /// @brief get event from communication queue
-    /// @return first element in queue
-    ///
-
 private:
 
     ///
@@ -189,7 +169,7 @@ private:
             {
                 if (std::shared_ptr<Common::TEventLoopHolder<T>> holder = m_event_holder.lock(); holder)
                 {
-                    std::unique_ptr<T> ev{holder->getEventConsumer()->consumeEvent()};
+                    T ev{holder->getEventConsumer()->consumeEvent()};
                     if (ev)
                     {
                         m_event_prc_func(ev);

@@ -78,6 +78,16 @@ public:
     ///
     CMqttConnection& operator=(const CMqttConnection&) & = delete;
 
+    ///
+    /// @brief move constructor
+    ///
+    CMqttConnection(CMqttConnection&&) = delete;
+
+    ///
+    /// @brief move assignment operator, deleted to hide move assignment
+    ///
+    CMqttConnection& operator=(CMqttConnection &&) = delete;
+
     ///------- IComponent implementation
 
     ///

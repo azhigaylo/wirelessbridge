@@ -28,7 +28,7 @@ public:
     /// @brief get event from communication queue
     /// @return first element in queue
     ///
-    virtual std::unique_ptr<T> consumeEvent() = 0;
+    virtual T consumeEvent() = 0;
 };
 
 } /// namespase Common

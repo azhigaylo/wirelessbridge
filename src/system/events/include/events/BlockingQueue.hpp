@@ -14,8 +14,11 @@
 #include <string>
 #include <atomic>
 #include <utility>
+#include <optional>
 #include <iostream>
 #include <condition_variable>
+
+#include <boost/optional.hpp>
 
 #include "loger/slog.h"
 
@@ -39,7 +42,7 @@ public:
     )
     : m_timeout(timeout)
     {
-
+        printDebug("TBlockingQueue/%s:  TBlockingQueue created ...", __FUNCTION__);
     }
 
     ///
@@ -74,26 +77,60 @@ public:
     /// @brief blocking pop element from queue
     /// @tparam T Type of the queue element
     ///
-    void pop(T& item)
+    boost::optional<T> pop()
+    {
+        boost::optional<T> elm;
+
+        std::unique_lock<std::mutex> lock{m_queue_mutex};
+        m_queue_cond_var.wait_for(lock, m_timeout, [&]() { return !m_queue.empty(); });
+
+        if (m_queue.size())
+        {
+            elm.emplace(std::move(m_queue.front()));
+            m_queue.pop();
+        }
+        return elm;
+    }
+
+    ///
+    /// @brief blocking pop element from queue
+    /// @tparam T Type of the queue element lvalue reference
+    ///
+    template<typename U = T>
+    typename std::enable_if<std::is_lvalue_reference<U&>::value, void>::type pop(U& item)
     {
         std::unique_lock<std::mutex> lock{m_queue_mutex};
         m_queue_cond_var.wait_for(lock, m_timeout, [&]() { return !m_queue.empty(); });
 
         if (m_queue.size())
         {
-            item = std::forward<T>(m_queue.front());
+            item = std::forward<U>(m_queue.front());
             m_queue.pop();
         }
     }
 
     ///
     /// @brief push element to queue
-    /// @tparam T Type of the queue element by reference
+    /// @tparam T Type of the queue element by lvalue reference
     ///
-    void push(T&& item)
+    template<typename U = T>
+    typename std::enable_if<std::is_lvalue_reference<U&>::value, void>::type push(const U& item)
     {
         std::unique_lock<std::mutex> lock(m_queue_mutex);
-        m_queue.push(std::forward<T>(item));
+        m_queue.push(item);
+        lock.unlock();
+        m_queue_cond_var.notify_one();
+    }
+
+    ///
+    /// @brief push element to queue
+    /// @tparam T Type of the queue element by rvalue reference
+    ///
+    template<typename U = T>
+    typename std::enable_if<std::is_rvalue_reference<U&&>::value, void>::type push(U&& item)
+    {
+        std::unique_lock<std::mutex> lock(m_queue_mutex);
+        m_queue.push(std::forward<U>(item));
         lock.unlock();
         m_queue_cond_var.notify_one();
     }
@@ -107,7 +144,7 @@ public:
         return m_queue.size();
     }
 
-    private:
+private:
     std::queue<T> m_queue;
     std::mutex m_queue_mutex;
     std::condition_variable m_queue_cond_var;

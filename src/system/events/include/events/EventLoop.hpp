@@ -8,6 +8,7 @@
 #pragma once
 
 #include <memory>
+#include <utility>
 #include <iostream>
 
 #include "EventSender.hpp"
@@ -34,25 +35,25 @@ public:
     /// @brief add event in communication queue
     /// @param event - HUD event
     ///
-    void sendEvent(std::unique_ptr<T> ev) final
+    void sendEvent(T ev) final
     {
-        m_queue.push(std::move(ev));
+        m_queue.push(std::forward<T>(ev));
     }
 
     ///
     /// @brief get event from communication queue
     /// @return first element in queue
     ///
-    std::unique_ptr<T> consumeEvent() final
+    T consumeEvent() final
     {
-        std::unique_ptr<T> ev;
+        T ev;
         m_queue.pop(ev);
         return (ev);
     }
 
 private:
 
-    TBlockingQueue<std::unique_ptr<T>> m_queue;
+    TBlockingQueue<T> m_queue;
 };
 
 } /// namespase Common

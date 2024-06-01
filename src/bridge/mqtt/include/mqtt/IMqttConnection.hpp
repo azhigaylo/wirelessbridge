@@ -18,7 +18,7 @@
 namespace Mqtt{
 
 class IMqttConnection : public HBE::TInterface<IMqttConnection>
-                      , public Common::TEventLoopHolder<TMqttEventVariant>
+                      , public Common::TEventLoopHolder<std::unique_ptr<TMqttEventVariant>>
 {
 public:
     ///

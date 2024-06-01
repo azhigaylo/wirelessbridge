@@ -76,6 +76,16 @@ public:
     ///
     CWirelessBridge& operator=(const CWirelessBridge&) & = delete;
 
+    ///
+    /// @brief move constructor
+    ///
+    CWirelessBridge(CWirelessBridge&&) = delete;
+
+    ///
+    /// @brief move assignment operator, deleted to hide move assignment
+    ///
+    CWirelessBridge& operator=(CWirelessBridge &&) = delete;
+
     ///------- IComponent implementation
 
     ///
@@ -138,7 +148,7 @@ private:
     CDeviceConfigPtr         m_dev_cfg;
     uint32_t                 m_cyclic_func_id;
 
-    Common::TEventHolderListener<Mqtt::TMqttEventVariant> m_mqtt_listener;
+    Common::TEventHolderListener<std::unique_ptr<Mqtt::TMqttEventVariant>> m_mqtt_listener;
     std::unordered_map<std::string, DevServiceBlk>        m_device_items;
 };
 } // namespace WBridge
