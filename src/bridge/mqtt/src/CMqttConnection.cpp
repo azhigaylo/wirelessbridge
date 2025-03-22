@@ -17,7 +17,6 @@ CMqttConnection::CMqttConnection(const ConfigType& cfg, const HBE::ResolvedDepen
     : m_dependencies{dependencies}
     , m_final_haven{m_dependencies.getInterface<FinalHaven>().lock()}
     , m_conn_man{m_dependencies.getInterface<ConnMan>().lock()}
-    , m_event_loop{std::make_shared<Common::TEventLoop<TMqttEventVariant>>()}
     , m_conn_status{System::IConnectable::EConnectionStatus::DISCONNECTED}
 {
     // store mqtt config
@@ -88,11 +87,6 @@ System::IConnectable::ConnectionInfo CMqttConnection::getClientInfo() const
 
 ///------- IMqttConnection implementation--------
 
-const std::shared_ptr<Common::TEventConsumer<TMqttEventVariant>> CMqttConnection::getEventContext() const
-{
-    return m_event_loop;
-}
-
 void CMqttConnection::subscribeTopic(const std::string& topic)
 {
     if (System::IConnectable::EConnectionStatus::CONNECTED == m_conn_status)
@@ -139,7 +133,7 @@ void CMqttConnection::on_connect(int rc)
         }
 
         // send online event
-        m_event_loop->sendEvent(
+        getEventSender()->sendEvent(
             std::make_unique<Mqtt::TMqttEventVariant>(Mqtt::CMqttOnlineEvent(true)));
     }
     else
@@ -152,7 +146,7 @@ void CMqttConnection::on_connect(int rc)
 
 void CMqttConnection::on_message(const struct mosquitto_message* message)
 {
-    m_event_loop->sendEvent(
+    getEventSender()->sendEvent(
         std::make_unique<Mqtt::TMqttEventVariant>(Mqtt::CMqttTopicUpdateEvent(
             std::string((char*)message->topic),
             std::string((char*)message->payload))));
@@ -165,7 +159,7 @@ void CMqttConnection::on_disconnect(int /*rc*/)
     m_conn_status = System::IConnectable::EConnectionStatus::DISCONNECTED;
 
     // send offline event
-    m_event_loop->sendEvent(
+    getEventSender()->sendEvent(
         std::make_unique<Mqtt::TMqttEventVariant>(Mqtt::CMqttOnlineEvent(false)));
 }
 

@@ -22,13 +22,13 @@ public:
     ///
     /// @brief destructor
     ///
-    virtual ~TEventConsumer() = default;
+    virtual ~TEventConsumer() noexcept = default;
 
     ///
     /// @brief get event from communication queue
     /// @return first element in queue
     ///
-    virtual std::unique_ptr<T> getEvent() = 0;
+    virtual T consumeEvent() = 0;
 };
 
 } /// namespase Common

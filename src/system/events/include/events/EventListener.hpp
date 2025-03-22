@@ -24,7 +24,7 @@ namespace Common{
 template <typename T>
 class TEventListener
 {
-typedef boost::function<void (const std::unique_ptr<T>&)> TEventPrcFunc;
+typedef boost::function<void (const T&)> TEventPrcFunc;
 
 public:
     ///
@@ -70,16 +70,6 @@ public:
     ///
     TEventListener& operator=(TEventListener &&) = delete;
 
-    ///
-    /// @brief add event in communication queue
-    /// @param event - HUD event
-    ///
-
-    ///
-    /// @brief get event from communication queue
-    /// @return first element in queue
-    ///
-
 private:
 
     ///
@@ -91,10 +81,13 @@ private:
         {
             while (!m_interrupted.load(std::memory_order_relaxed))
             {
-                std::unique_ptr<T> ev{m_consumer->getEvent()};
-                if (ev)
+                if (std::shared_ptr<Common::TEventConsumer<T>> consumer = m_consumer.lock(); consumer)
                 {
-                    m_event_prc_func(ev);
+                    T ev{consumer->consumeEvent()};
+                    if (ev)
+                    {
+                        m_event_prc_func(ev);
+                    }
                 }
             }
         }
@@ -108,7 +101,7 @@ private:
 
     std::atomic_bool m_interrupted;
     TEventPrcFunc m_event_prc_func;
-    std::shared_ptr<Common::TEventConsumer<T>> m_consumer;
+    std::weak_ptr<Common::TEventConsumer<T>> m_consumer;
     std::unique_ptr<boost::scoped_thread<>> m_event_thread;
 };
 
@@ -118,7 +111,7 @@ private:
 template <typename T>
 class TEventHolderListener
 {
-typedef boost::function<void (const std::unique_ptr<T>&)> TEventPrcFunc;
+typedef boost::function<void (const T&)> TEventPrcFunc;
 
 public:
     ///
@@ -128,8 +121,7 @@ public:
         std::shared_ptr<Common::TEventLoopHolder<T>> event_holder,
         TEventPrcFunc func
     )
-    : m_interrupted{false}
-    , m_event_prc_func(func)
+    : m_event_prc_func(func)
     , m_event_holder{event_holder}
     , m_event_thread{std::make_unique<boost::scoped_thread<>>(boost::bind(&TEventHolderListener::eventLoop, this))}
     {
@@ -164,16 +156,6 @@ public:
     ///
     TEventHolderListener& operator=(TEventHolderListener &&) = delete;
 
-    ///
-    /// @brief add event in communication queue
-    /// @param event - HUD event
-    ///
-
-    ///
-    /// @brief get event from communication queue
-    /// @return first element in queue
-    ///
-
 private:
 
     ///
@@ -185,11 +167,15 @@ private:
         {
             while (!m_interrupted.load(std::memory_order_relaxed))
             {
-                std::unique_ptr<T> ev{m_event_holder->getEventContext()->getEvent()};
-                if (ev)
+                if (std::shared_ptr<Common::TEventLoopHolder<T>> holder = m_event_holder.lock(); holder)
                 {
-                    m_event_prc_func(ev);
+                    T ev{holder->getEventConsumer()->consumeEvent()};
+                    if (ev)
+                    {
+                        m_event_prc_func(ev);
+                    }
                 }
+                else break;
             }
         }
         catch (const std::exception& e)
@@ -200,10 +186,10 @@ private:
         }
     }
 
-    std::atomic_bool m_interrupted;
+    std::atomic_bool m_interrupted{false};
     TEventPrcFunc m_event_prc_func;
-    std::shared_ptr<Common::TEventLoopHolder<T>> m_event_holder;
+    std::weak_ptr<Common::TEventLoopHolder<T>> m_event_holder;
     std::unique_ptr<boost::scoped_thread<>> m_event_thread;
 };
 
-} /// namespase Common
+} /// namespace Common

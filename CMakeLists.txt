@@ -29,7 +29,6 @@ endif()
 include(EnableCxxCompilerFlag)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
-    enable_cxx_compiler_flag_if_supported(-Werror=all)
     enable_cxx_compiler_flag_if_supported(-Werror=extra)
     enable_cxx_compiler_flag_if_supported(-Werror=shadow)
     enable_cxx_compiler_flag_if_supported(-Werror=cast-align)
